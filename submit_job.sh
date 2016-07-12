@@ -1,0 +1,1 @@
+docker run --net spark_network -v /c/Users/Manuel/docker_spark/:/host/ -v /c/Users/Manuel/Projects/TestSpark/target/scala-2.10/:/eclipse_target/ dread1982/super_spark:v5 /opt/spark/bin/spark-submit --class "SampleApp" --master spark://master:7077 --jars /host/spark-cassandra-connector-assembly-1.6.0-M2.jar /eclipse_target/testspark_2.10-1.0.jar
