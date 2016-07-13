@@ -7,6 +7,6 @@ docker run -d --net spark_network --name slave -p 8081:8081 -p 8888:8888 dread19
 #/start_spark_worker.sh "$@"
 #/usr/bin/supervisord --configuration=/opt/conf/slave.conf
 
-
+docker run --name cassandra_3 --net spark_network -v cas_data:/var/lib/cassandra -d cassandra:3.0
 #docker run --name cassandra_3 --net spark_network -v /c/Users/Manuel/docker_spark/cassandra_datadir:/var/lib/cassandra -d cassandra:3.0
-docker run --name cassandra_3 --net spark_network -v /var/lib/cassandra -d cassandra:3.0
+#docker run --name cassandra_3 --net spark_network -v /var/lib/cassandra -d cassandra:3.0
