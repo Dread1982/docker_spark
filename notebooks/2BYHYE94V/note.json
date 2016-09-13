@@ -1,0 +1,331 @@
+{
+  "paragraphs": [
+    {
+      "text": "val movies \u003d sc.parallelize( Array(\"Frozen, 2013\", \"Toy Story, 1995\", \"WALL-E, 2008\", \"Despicable Me, 2010\", \"Shrek, 2001\", \"The Lego Movie, 2014\", \"Alice in Wonderland, 2010\") )",
+      "dateUpdated": "Sep 13, 2016 9:09:43 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473800841075_-651846633",
+      "id": "20160913-210721_1182038550",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: org.apache.spark.rdd.RDD[String] \u003d ParallelCollectionRDD[0] at parallelize at \u003cconsole\u003e:29\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:07:21 PM",
+      "dateStarted": "Sep 13, 2016 9:09:43 PM",
+      "dateFinished": "Sep 13, 2016 9:09:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies2010 \u003d movies.filter(m \u003d\u003e m.split(\",\").last.trim.toInt \u003d\u003d 2010)",
+      "dateUpdated": "Sep 13, 2016 9:12:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473800983825_1190547283",
+      "id": "20160913-210943_562602506",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies2010: org.apache.spark.rdd.RDD[String] \u003d MapPartitionsRDD[1] at filter at \u003cconsole\u003e:31\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:09:43 PM",
+      "dateStarted": "Sep 13, 2016 9:12:08 PM",
+      "dateFinished": "Sep 13, 2016 9:12:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "movies2010.collect.foreach(println)",
+      "dateUpdated": "Sep 13, 2016 9:30:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802248853_1381202137",
+      "id": "20160913-213048_1304890882",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Despicable Me, 2010\nAlice in Wonderland, 2010\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:30:48 PM",
+      "dateStarted": "Sep 13, 2016 9:30:57 PM",
+      "dateFinished": "Sep 13, 2016 9:30:58 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val familyMovies \u003d movies2010.map(m \u003d\u003e (m, Set(\"Family\", \"Animation\")))",
+      "dateUpdated": "Sep 13, 2016 9:23:52 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473801128006_1987544501",
+      "id": "20160913-211208_581281408",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "familyMovies: org.apache.spark.rdd.RDD[(String, scala.collection.immutable.Set[String])] \u003d MapPartitionsRDD[2] at map at \u003cconsole\u003e:33\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:12:08 PM",
+      "dateStarted": "Sep 13, 2016 9:23:53 PM",
+      "dateFinished": "Sep 13, 2016 9:23:54 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "familyMovies.collect.foreach(println)",
+      "dateUpdated": "Sep 13, 2016 9:30:42 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802236317_963334183",
+      "id": "20160913-213036_1877273454",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(Despicable Me, 2010,Set(Family, Animation))\n(Alice in Wonderland, 2010,Set(Family, Animation))\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:30:36 PM",
+      "dateStarted": "Sep 13, 2016 9:30:42 PM",
+      "dateFinished": "Sep 13, 2016 9:30:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val familyGenres \u003d familyMovies.flatMap{case (m,g) \u003d\u003e g}.distinct",
+      "dateUpdated": "Sep 13, 2016 9:25:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473801824390_1406602666",
+      "id": "20160913-212344_1409804375",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "familyGenres: org.apache.spark.rdd.RDD[String] \u003d MapPartitionsRDD[6] at distinct at \u003cconsole\u003e:35\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:23:44 PM",
+      "dateStarted": "Sep 13, 2016 9:26:00 PM",
+      "dateFinished": "Sep 13, 2016 9:26:01 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "familyGenres.collect.foreach(println)",
+      "dateUpdated": "Sep 13, 2016 9:30:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "editorHide": false,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473801947677_-1523311638",
+      "id": "20160913-212547_1295268943",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Family\nAnimation\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:25:47 PM",
+      "dateStarted": "Sep 13, 2016 9:30:26 PM",
+      "dateFinished": "Sep 13, 2016 9:30:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val pairs \u003d familyGenres.cartesian(familyGenres).filter{case (g1,g2) \u003d\u003e g1 !\u003d g2}",
+      "dateUpdated": "Sep 13, 2016 9:31:49 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802019895_-1928528851",
+      "id": "20160913-212659_1491736128",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "pairs: org.apache.spark.rdd.RDD[(String, String)] \u003d MapPartitionsRDD[8] at filter at \u003cconsole\u003e:37\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:26:59 PM",
+      "dateStarted": "Sep 13, 2016 9:31:49 PM",
+      "dateFinished": "Sep 13, 2016 9:31:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "pairs.collect.foreach(println)",
+      "dateUpdated": "Sep 13, 2016 9:32:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802309852_1428803731",
+      "id": "20160913-213149_691572617",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(Family,Animation)\n(Animation,Family)\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:31:49 PM",
+      "dateStarted": "Sep 13, 2016 9:32:08 PM",
+      "dateFinished": "Sep 13, 2016 9:32:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802328795_12943103",
+      "id": "20160913-213208_961385096",
+      "dateCreated": "Sep 13, 2016 9:32:08 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Transformations",
+  "id": "2BYHYE94V",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

@@ -1,0 +1,123 @@
+{
+  "paragraphs": [
+    {
+      "text": "val movies \u003d sc.parallelize( Array(\"Frozen, 2013\", \"Toy Story, 1995\", \"WALL-E, 2008\", \"Despicable Me, 2010\", \"Shrek, 2001\", \"The Lego Movie, 2014\", \"Alice in Wonderland, 2010\") )",
+      "dateUpdated": "Sep 13, 2016 9:42:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802939950_628785409",
+      "id": "20160913-214219_2109350595",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: org.apache.spark.rdd.RDD[String] \u003d ParallelCollectionRDD[10] at parallelize at \u003cconsole\u003e:29\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:42:19 PM",
+      "dateStarted": "Sep 13, 2016 9:42:34 PM",
+      "dateFinished": "Sep 13, 2016 9:42:34 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val totalLength \u003d  movies.map(m \u003d\u003e m.substring(0, m.length - 6).length)\r\n                         .reduce{case (x,y) \u003d\u003e x + y}\r\n\r\nprintln(totalLength)",
+      "dateUpdated": "Sep 13, 2016 9:43:13 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802954174_-1817048025",
+      "id": "20160913-214234_1176897892",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "totalLength: Int \u003d 72\n72\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:42:34 PM",
+      "dateStarted": "Sep 13, 2016 9:43:13 PM",
+      "dateFinished": "Sep 13, 2016 9:43:14 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val totalCount  \u003d sc.accumulator(0)\r\nval totalLength \u003d sc.accumulator(0)\r\n\r\nmovies.map(m \u003d\u003e m.substring(0,m.length - 6).length)\r\n      .foreach{ l \u003d\u003e totalCount +\u003d 1; totalLength +\u003d l }\r\n\r\nprintln(totalLength.value / totalCount.value)\r\nprintln(totalLength.value.toDouble / totalCount.value)",
+      "dateUpdated": "Sep 13, 2016 9:44:00 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802993146_801214213",
+      "id": "20160913-214313_1348475763",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "totalCount: org.apache.spark.Accumulator[Int] \u003d 0\ntotalLength: org.apache.spark.Accumulator[Int] \u003d 0\n10\n10.285714285714286\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:43:13 PM",
+      "dateStarted": "Sep 13, 2016 9:44:00 PM",
+      "dateFinished": "Sep 13, 2016 9:44:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473803040658_1310129739",
+      "id": "20160913-214400_313520498",
+      "dateCreated": "Sep 13, 2016 9:44:00 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Actions",
+  "id": "2BVTXNPJA",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

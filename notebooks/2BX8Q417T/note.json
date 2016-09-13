@@ -1,0 +1,91 @@
+{
+  "paragraphs": [
+    {
+      "text": "val nums \u003d sc.parallelize(Array(1,2,3,4))",
+      "dateUpdated": "Sep 13, 2016 9:37:09 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802586957_697394427",
+      "id": "20160913-213626_4980242",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "nums: org.apache.spark.rdd.RDD[Int] \u003d ParallelCollectionRDD[9] at parallelize at \u003cconsole\u003e:29\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:36:26 PM",
+      "dateStarted": "Sep 13, 2016 9:37:09 PM",
+      "dateFinished": "Sep 13, 2016 9:37:10 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "nums.reduce((x,y) \u003d\u003e x + y)",
+      "dateUpdated": "Sep 13, 2016 9:37:30 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802614339_-977186028",
+      "id": "20160913-213654_1912240826",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res26: Int \u003d 10\n"
+      },
+      "dateCreated": "Sep 13, 2016 9:36:54 PM",
+      "dateStarted": "Sep 13, 2016 9:37:30 PM",
+      "dateFinished": "Sep 13, 2016 9:37:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473802650366_-699720774",
+      "id": "20160913-213730_1035333008",
+      "dateCreated": "Sep 13, 2016 9:37:30 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Playground",
+  "id": "2BX8Q417T",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
