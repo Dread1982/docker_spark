@@ -12,4 +12,4 @@ docker run --name cassandra_3 --net spark_network -v cas_data:/var/lib/cassandra
 #docker run --name cassandra_3 --net spark_network -v /var/lib/cassandra -d cassandra:3.0
 
 
-docker run --name zeppelin -d --net spark_network -p 9999:9999 -v /c/Users/Manuel/docker_spark/:/host/ dread1982/zeppelin:v6 /usr/bin/supervisord --configuration=/opt/conf/zeppelin.conf
+docker run --name zeppelin -d --net spark_network -p 9999:9999 -v /c/Users/Manuel/docker_spark/:/host/ dread1982/zeppelin:v8 /usr/bin/supervisord --configuration=/opt/conf/zeppelin.conf
