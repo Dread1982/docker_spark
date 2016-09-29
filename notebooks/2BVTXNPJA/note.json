@@ -113,11 +113,11 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Actions",
+  "name": "3-Actions",
   "id": "2BVTXNPJA",
-  "angularObjects": {
-    "2BVBBXM7F:shared_process": []
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
   },
-  "config": {},
   "info": {}
 }

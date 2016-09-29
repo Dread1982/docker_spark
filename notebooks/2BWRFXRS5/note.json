@@ -1,0 +1,520 @@
+{
+  "paragraphs": [
+    {
+      "text": "import com.datastax.spark.connector._",
+      "dateUpdated": "Sep 14, 2016 1:45:25 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473852566539_1232010175",
+      "id": "20160914-112926_16543884",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import com.datastax.spark.connector._\n"
+      },
+      "dateCreated": "Sep 14, 2016 11:29:26 AM",
+      "dateStarted": "Sep 14, 2016 1:45:25 PM",
+      "dateFinished": "Sep 14, 2016 1:46:55 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "/*sc.stop\r\nimport com.datastax.spark.connector._, org.apache.spark.SparkContext, org.apache.spark.SparkContext._, org.apache.spark.SparkConf\r\nval conf \u003d new SparkConf(true).set(\"spark.cassandra.connection.host\", \"cassandra_3\")\r\nval sc \u003d new SparkContext(conf)*/",
+      "dateUpdated": "Sep 14, 2016 1:25:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473853921353_-2017660066",
+      "id": "20160914-115201_883065945",
+      "dateCreated": "Sep 14, 2016 11:52:01 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .select(\"title\",\"release_year\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003e 2010\")\r\n  .withDescOrder\r\n  .limit(5)\r\n  .collect\r\n  .foreach(println)",
+      "dateUpdated": "Sep 14, 2016 1:46:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 315.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473850205945_1763192996",
+      "id": "20160914-105005_877589172",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "CassandraRow{title: Pirates of the Caribbean: Dead Men Tell No Tales, release_year: 2017}\nCassandraRow{title: Alice Through the Looking Glass, release_year: 2016}\nCassandraRow{title: Yoga Hosers, release_year: 2015}\nCassandraRow{title: Mortdecai, release_year: 2015}\nCassandraRow{title: Black Mass, release_year: 2015}\n"
+      },
+      "dateCreated": "Sep 14, 2016 10:50:05 AM",
+      "dateStarted": "Sep 14, 2016 1:46:58 PM",
+      "dateFinished": "Sep 14, 2016 1:47:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n//movies.collect.foreach(println)",
+      "dateUpdated": "Sep 14, 2016 1:49:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473850616710_-2116815771",
+      "id": "20160914-105656_1097628263",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] \u003d CassandraTableScanRDD[10] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "Sep 14, 2016 10:56:56 AM",
+      "dateStarted": "Sep 14, 2016 1:49:55 PM",
+      "dateFinished": "Sep 14, 2016 1:49:57 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "movies.filter(row \u003d\u003e row.getString(\"title\").toLowerCase.contains(\"pirate\"))\r\n      .map{ row \u003d\u003e row.getString(\"title\") +\r\n            \" (\" + row.getInt(\"release_year\") + \")\" +\r\n            \" [\" + row.getFloatOption(\"rating\").getOrElse(\"Not rated yet\") + \"]\" }\r\n      .collect\r\n      .foreach(println)",
+      "dateUpdated": "Sep 14, 2016 1:52:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473860864146_1118151786",
+      "id": "20160914-134744_2028361422",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Pirates of the Caribbean: Dead Men Tell No Tales (2017) [Not rated yet]\nPirates of the Caribbean: On Stranger Tides (2011) [6.7]\nPirates of the Caribbean: At World\u0027s End (2007) [7.1]\nPirates of the Caribbean: Dead Man\u0027s Chest (2006) [7.3]\nPirates of the Caribbean: The Curse of the Black Pearl (2003) [8.1]\n"
+      },
+      "dateCreated": "Sep 14, 2016 1:47:44 PM",
+      "dateStarted": "Sep 14, 2016 1:52:51 PM",
+      "dateFinished": "Sep 14, 2016 1:52:58 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "movies.filter{ row \u003d\u003e row.getSet[String](\"genres\").contains(\"Adventure\") \u0026\u0026\r\n                      row.get[Option[Float]](\"rating\").isDefined \u0026\u0026\r\n                      row.get[Option[Float]](\"rating\").get \u003e\u003d 7.5 }\r\n      .map{ row \u003d\u003e row.getString(\"title\") +\r\n            \" (\" + row.getInt(\"release_year\") + \")\" +\r\n            \" [\" + row.getFloat(\"rating\") + \"]\" }\r\n      .collect\r\n      .foreach(println)",
+      "dateUpdated": "Sep 14, 2016 1:55:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861170800_573376348",
+      "id": "20160914-135250_974029361",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Pirates of the Caribbean: The Curse of the Black Pearl (2003) [8.1]\n"
+      },
+      "dateCreated": "Sep 14, 2016 1:52:50 PM",
+      "dateStarted": "Sep 14, 2016 1:55:08 PM",
+      "dateFinished": "Sep 14, 2016 1:55:12 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "//Converting cassandra data\n//########################################",
+      "dateUpdated": "Sep 14, 2016 2:05:54 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861246645_2021494587",
+      "id": "20160914-135406_1901529714",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 14, 2016 1:54:06 PM",
+      "dateStarted": "Sep 14, 2016 2:05:55 PM",
+      "dateFinished": "Sep 14, 2016 2:05:55 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d sc.cassandraTable[(Int,String,Option[Float])](\"killr_video\",\"movies_by_actor\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027\").select(\"release_year\",\"title\",\"rating\")",
+      "dateUpdated": "Sep 14, 2016 2:01:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861662337_455841048",
+      "id": "20160914-140102_713256095",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[(Int, String, Option[Float])] \u003d CassandraTableScanRDD[21] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:01:02 PM",
+      "dateStarted": "Sep 14, 2016 2:01:47 PM",
+      "dateFinished": "Sep 14, 2016 2:01:51 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027\").select(\"release_year\",\"title\",\"rating\")\r\n               .as((y:Int,t:String,r:Option[Float]) \u003d\u003e (y,t,r))",
+      "dateUpdated": "Sep 14, 2016 2:02:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861706883_1641329031",
+      "id": "20160914-140146_1204083227",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: com.datastax.spark.connector.rdd.CassandraRDD[(Int, String, Option[Float])] \u003d CassandraTableScanRDD[25] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:01:46 PM",
+      "dateStarted": "Sep 14, 2016 2:02:50 PM",
+      "dateFinished": "Sep 14, 2016 2:02:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class Record(releaseYear: Int, title: String, rating: Option[Float])\r\nval movies \u003d sc.cassandraTable[Record](\"killr_video\",\"movies_by_actor\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027\").select(\"release_year\",\"title\",\"rating\")",
+      "dateUpdated": "Sep 14, 2016 2:04:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861770728_-1929648105",
+      "id": "20160914-140250_1501962803",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class Record\nmovies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[Record] \u003d CassandraTableScanRDD[28] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:02:50 PM",
+      "dateStarted": "Sep 14, 2016 2:04:05 PM",
+      "dateFinished": "Sep 14, 2016 2:04:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class Record(releaseYear: Int, title: String, rating: Option[Float])\r\nval movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027\").select(\"release_year\",\"title\",\"rating\")\r\n               .as((y:Int,t:String,r:Option[Float]) \u003d\u003e new Record(y,t,r))",
+      "dateUpdated": "Sep 14, 2016 2:04:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861844889_-1495727966",
+      "id": "20160914-140404_1314411602",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class Record\nmovies: com.datastax.spark.connector.rdd.CassandraRDD[Record] \u003d CassandraTableScanRDD[32] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:04:04 PM",
+      "dateStarted": "Sep 14, 2016 2:04:48 PM",
+      "dateFinished": "Sep 14, 2016 2:04:51 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// saving back to Cassandra\n// #########################",
+      "dateUpdated": "Sep 14, 2016 2:07:51 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473861888534_-1368868098",
+      "id": "20160914-140448_1801637065",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 14, 2016 2:04:48 PM",
+      "dateStarted": "Sep 14, 2016 2:07:51 PM",
+      "dateFinished": "Sep 14, 2016 2:07:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movie \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n              .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n              .select(\"title\",\"release_year\",\"rating\")\r\n              .filter(row \u003d\u003e row.getString(\"title\") \u003d\u003d \"Alice in Wonderland\")\r\n\r\nmovie.saveToCassandra(\"killr_video\",\"favorite_movies\",\r\n                      SomeColumns(\"title\",\"release_year\",\"rating\"))",
+      "dateUpdated": "Sep 14, 2016 2:11:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473862071258_28968984",
+      "id": "20160914-140751_1347968438",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movie: org.apache.spark.rdd.RDD[com.datastax.spark.connector.CassandraRow] \u003d MapPartitionsRDD[36] at filter at \u003cconsole\u003e:35\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:07:51 PM",
+      "dateStarted": "Sep 14, 2016 2:11:46 PM",
+      "dateFinished": "Sep 14, 2016 2:11:53 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class GenresInfo (title: String, releaseYear: Int, genres: Set[String])\r\n\r\nval genres \u003d sc.parallelize(Seq(\r\n                 new GenresInfo(\"Alice in Wonderland\",2010,Set(\"Adventure\",\"Family\"))\r\n                ))\r\n\r\ngenres.saveToCassandra(\"killr_video\",\"favorite_movies\",\r\n                       SomeColumns(\"title\",\"release_year\",\"genres\"))",
+      "dateUpdated": "Sep 14, 2016 2:14:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473862306429_-2131459032",
+      "id": "20160914-141146_35997302",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class GenresInfo\ngenres: org.apache.spark.rdd.RDD[GenresInfo] \u003d ParallelCollectionRDD[37] at parallelize at \u003cconsole\u003e:34\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:11:46 PM",
+      "dateStarted": "Sep 14, 2016 2:14:57 PM",
+      "dateFinished": "Sep 14, 2016 2:15:01 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val details \u003d sc.parallelize(Seq(\r\n                  (\"Alice in Wonderland\",2010,\r\n                   UDTValue.fromMap(Map(\"country\"-\u003e\"USA\",\"language\"-\u003e\"English\",\"runtime\"-\u003e108)))\r\n                 ))\r\n\r\ndetails.saveToCassandra(\"killr_video\",\"favorite_movies\",\r\n                        SomeColumns(\"title\",\"release_year\",\"details\"))",
+      "dateUpdated": "Sep 14, 2016 2:18:59 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473862497075_1524283811",
+      "id": "20160914-141457_977250136",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "details: org.apache.spark.rdd.RDD[(String, Int, com.datastax.spark.connector.UDTValue)] \u003d ParallelCollectionRDD[38] at parallelize at \u003cconsole\u003e:32\njava.util.NoSuchElementException: Columns not found in table killr_video.favorite_movies: details\n\tat com.datastax.spark.connector.SomeColumns.selectFrom(ColumnSelector.scala:38)\n\tat com.datastax.spark.connector.writer.TableWriter$.apply(TableWriter.scala:270)\n\tat com.datastax.spark.connector.RDDFunctions.saveToCassandra(RDDFunctions.scala:36)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:35)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:41)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:43)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:45)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:47)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:49)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:51)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:53)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:55)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:57)\n\tat \u003cinit\u003e(\u003cconsole\u003e:59)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:63)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1065)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1346)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:840)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:871)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:819)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:14:57 PM",
+      "dateStarted": "Sep 14, 2016 2:18:59 PM",
+      "dateFinished": "Sep 14, 2016 2:19:04 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473862739149_-963353148",
+      "id": "20160914-141859_1628180247",
+      "dateCreated": "Sep 14, 2016 2:18:59 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "4-cassandra_connect",
+  "id": "2BWRFXRS5",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

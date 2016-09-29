@@ -1,0 +1,189 @@
+{
+  "paragraphs": [
+    {
+      "text": "sc",
+      "dateUpdated": "Sep 28, 2016 9:20:40 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475054434310_1549670687",
+      "id": "20160928-092034_1653889027",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res0: org.apache.spark.SparkContext \u003d org.apache.spark.SparkContext@25c8f51e\n"
+      },
+      "dateCreated": "Sep 28, 2016 9:20:34 AM",
+      "dateStarted": "Sep 28, 2016 9:20:40 AM",
+      "dateFinished": "Sep 28, 2016 9:22:08 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.mllib.linalg.Vectors\r\nimport org.apache.spark.ml.attribute.NominalAttribute\r\nimport org.apache.spark.sql.Row\r\nimport org.apache.spark.sql.types.{StructType,StructField,StringType}\r\n//calculate minuted from midnight, input is military time format \r\ndef getMinuteOfDay(depTime: String) : Int \u003d (depTime.toInt / 100).toInt * 60 + (depTime.toInt % 100)\r\n//define schema for raw data\r\ncase class Flight(Month: String, DayofMonth: String, DayOfWeek: String, DepTime: Int, CRSDepTime: Int, ArrTime: Int, CRSArrTime: Int, UniqueCarrier: String, ActualElapsedTime: Int, CRSElapsedTime: Int, AirTime: Int, ArrDelay: Double, DepDelay: Int, Origin: String, Distance: Int)\r\nval flight2007 \u003d sc.textFile(\"/host/data/flights/flights_2007.csv.bz2\")\r\nval header \u003d flight2007.first\r\nval trainingData \u003d flight2007\r\n                    .filter(x \u003d\u003e x !\u003d header)\r\n                    .map(x \u003d\u003e x.split(\",\"))\r\n                    .filter(x \u003d\u003e x(21) \u003d\u003d \"0\")\r\n                    .filter(x \u003d\u003e x(17) \u003d\u003d \"ORD\")\r\n                    .filter(x \u003d\u003e x(14) !\u003d \"NA\")\r\n                    .map(p \u003d\u003e Flight(p(1), p(2), p(3), getMinuteOfDay(p(4)), getMinuteOfDay(p(5)), getMinuteOfDay(p(6)), getMinuteOfDay(p(7)), p(8), p(11).toInt, p(12).toInt, p(13).toInt, p(14).toDouble, p(15).toInt, p(16), p(18).toInt))\r\n                    .toDF\r\ntrainingData.cache\r\nval flight2008 \u003d sc.textFile(\"/host/data/flights/flights_2008.csv.bz2\")\r\nval testingData \u003d flight2008\r\n                    .filter(x \u003d\u003e x !\u003d header)\r\n                    .map(x \u003d\u003e x.split(\",\"))\r\n                    .filter(x \u003d\u003e x(21) \u003d\u003d \"0\")\r\n                    .filter(x \u003d\u003e x(17) \u003d\u003d \"ORD\")\r\n                    .filter(x \u003d\u003e x(14) !\u003d \"NA\")\r\n                    .map(p \u003d\u003e Flight(p(1), p(2), p(3), getMinuteOfDay(p(4)), getMinuteOfDay(p(5)), getMinuteOfDay(p(6)), getMinuteOfDay(p(7)), p(8), p(11).toInt, p(12).toInt, p(13).toInt, p(14).toDouble, p(15).toInt, p(16), p(18).toInt))\r\n                    .toDF\r\ntestingData.cache",
+      "dateUpdated": "Sep 28, 2016 9:25:49 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475054440387_650143083",
+      "id": "20160928-092040_1243746142",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.ml.attribute.NominalAttribute\nimport org.apache.spark.sql.Row\nimport org.apache.spark.sql.types.{StructType, StructField, StringType}\ngetMinuteOfDay: (depTime: String)Int\ndefined class Flight\nflight2007: org.apache.spark.rdd.RDD[String] \u003d /host/data/flights/flights_2007.csv.bz2 MapPartitionsRDD[3] at textFile at \u003cconsole\u003e:33\nheader: String \u003d Year,Month,DayofMonth,DayOfWeek,DepTime,CRSDepTime,ArrTime,CRSArrTime,UniqueCarrier,FlightNum,TailNum,ActualElapsedTime,CRSElapsedTime,AirTime,ArrDelay,DepDelay,Origin,Dest,Distance,TaxiIn,TaxiOut,Cancelled,CancellationCode,Diverted,CarrierDelay,WeatherDelay,NASDelay,SecurityDelay,LateAircraftDelay\ntrainingData: org.apache.spark.sql.DataFrame \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int]\nres3: trainingData.type \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int]\nflight2008: org.apache.spark.rdd.RDD[String] \u003d /host/data/flights/flights_2008.csv.bz2 MapPartitionsRDD[14] at textFile at \u003cconsole\u003e:33\ntestingData: org.apache.spark.sql.DataFrame \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int]\nres4: testingData.type \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int]\n"
+      },
+      "dateCreated": "Sep 28, 2016 9:20:40 AM",
+      "dateStarted": "Sep 28, 2016 9:25:49 AM",
+      "dateFinished": "Sep 28, 2016 9:26:06 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.feature.StringIndexer\r\nimport org.apache.spark.ml.feature.VectorAssembler\r\n \r\n \r\n//tranformor to convert string to category values\r\nval monthIndexer \u003d new StringIndexer().setInputCol(\"Month\").setOutputCol(\"MonthCat\")\r\nval dayofMonthIndexer \u003d new StringIndexer().setInputCol(\"DayofMonth\").setOutputCol(\"DayofMonthCat\")\r\nval dayOfWeekIndexer \u003d new StringIndexer().setInputCol(\"DayOfWeek\").setOutputCol(\"DayOfWeekCat\")\r\nval uniqueCarrierIndexer \u003d new StringIndexer().setInputCol(\"UniqueCarrier\").setOutputCol(\"UniqueCarrierCat\")\r\nval originIndexer \u003d new StringIndexer().setInputCol(\"Origin\").setOutputCol(\"OriginCat\")\r\n \r\n \r\n//assemble raw feature\r\nval assembler \u003d new VectorAssembler()\r\n                    .setInputCols(Array(\"MonthCat\", \"DayofMonthCat\", \"DayOfWeekCat\", \"UniqueCarrierCat\", \"OriginCat\", \"DepTime\", \"CRSDepTime\", \"ArrTime\", \"CRSArrTime\", \"ActualElapsedTime\", \"CRSElapsedTime\", \"AirTime\",\"DepDelay\", \"Distance\"))\r\n                    .setOutputCol(\"rawFeatures\")",
+      "dateUpdated": "Sep 28, 2016 9:30:06 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475054749045_-620052598",
+      "id": "20160928-092549_1018463715",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.ml.feature.StringIndexer\nimport org.apache.spark.ml.feature.VectorAssembler\nmonthIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_4f5c9305fa0b\ndayofMonthIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_f41cbf1c9310\ndayOfWeekIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_c116b3873f3f\nuniqueCarrierIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_569fdfac70a4\noriginIndexer: org.apache.spark.ml.feature.StringIndexer \u003d strIdx_a5d3fca14ff8\nassembler: org.apache.spark.ml.feature.VectorAssembler \u003d vecAssembler_df44ac192faf\n"
+      },
+      "dateCreated": "Sep 28, 2016 9:25:49 AM",
+      "dateStarted": "Sep 28, 2016 9:30:06 AM",
+      "dateFinished": "Sep 28, 2016 9:30:11 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.classification.LogisticRegression\r\nimport org.apache.spark.ml.feature.Binarizer\r\nimport org.apache.spark.ml.feature.VectorSlicer\r\nimport org.apache.spark.ml.Pipeline\r\nimport org.apache.spark.ml.feature.StandardScaler\r\n//vestor slicer\r\nval slicer \u003d new VectorSlicer().setInputCol(\"rawFeatures\").setOutputCol(\"slicedfeatures\").setNames(Array(\"MonthCat\", \"DayofMonthCat\", \"DayOfWeekCat\", \"UniqueCarrierCat\", \"DepTime\", \"ArrTime\", \"ActualElapsedTime\", \"AirTime\", \"DepDelay\", \"Distance\"))\r\n//scale the features\r\nval scaler \u003d new StandardScaler().setInputCol(\"slicedfeatures\").setOutputCol(\"features\").setWithStd(true).setWithMean(true)\r\n//labels for binary classifier\r\nval binarizerClassifier \u003d new Binarizer().setInputCol(\"ArrDelay\").setOutputCol(\"binaryLabel\").setThreshold(15.0)\r\n//logistic regression\r\nval lr \u003d new LogisticRegression().setMaxIter(10).setRegParam(0.3).setElasticNetParam(0.8).setLabelCol(\"binaryLabel\").setFeaturesCol(\"features\")\r\n// Chain indexers and tree in a Pipeline\r\nval lrPipeline \u003d new Pipeline().setStages(Array(monthIndexer, dayofMonthIndexer, dayOfWeekIndexer, uniqueCarrierIndexer, originIndexer, assembler, slicer, scaler, binarizerClassifier, lr))\r\n// Train model. \r\nval lrModel \u003d lrPipeline.fit(trainingData)\r\n// Make predictions.\r\nval lrPredictions \u003d lrModel.transform(testingData)\r\n// Select example rows to display.\r\nlrPredictions.select(\"prediction\", \"binaryLabel\", \"features\").show(20)",
+      "dateUpdated": "Sep 28, 2016 9:32:36 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475055006842_-1784547433",
+      "id": "20160928-093006_1625092522",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.ml.classification.LogisticRegression\nimport org.apache.spark.ml.feature.Binarizer\nimport org.apache.spark.ml.feature.VectorSlicer\nimport org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.feature.StandardScaler\nslicer: org.apache.spark.ml.feature.VectorSlicer \u003d vectorSlicer_8ff5978e98ed\nscaler: org.apache.spark.ml.feature.StandardScaler \u003d stdScal_124e1d1eeefb\nbinarizerClassifier: org.apache.spark.ml.feature.Binarizer \u003d binarizer_76df58608a6c\nlr: org.apache.spark.ml.classification.LogisticRegression \u003d logreg_313c41258d0b\nlrPipeline: org.apache.spark.ml.Pipeline \u003d pipeline_8229630f71ac\nlrModel: org.apache.spark.ml.PipelineModel \u003d pipeline_8229630f71ac\nlrPredictions: org.apache.spark.sql.DataFrame \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int, MonthCat: double, DayofMonthCat: double, DayOfWeekCat: double, UniqueCarrierCat: double, OriginCat: double, rawFeatures: vector, slicedfeatures: vector, features: vector, binaryLabel: double, rawPrediction: vector, probability: vector, prediction: double]\n+----------+-----------+--------------------+\n|prediction|binaryLabel|            features|\n+----------+-----------+--------------------+\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n|       0.0|        1.0|[-0.3875416801247...|\n|       0.0|        0.0|[-0.3875416801247...|\n+----------+-----------+--------------------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Sep 28, 2016 9:30:06 AM",
+      "dateStarted": "Sep 28, 2016 9:32:36 AM",
+      "dateFinished": "Sep 28, 2016 9:35:50 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.ml.feature.Bucketizer\r\nimport org.apache.spark.ml.Pipeline\r\nimport org.apache.spark.ml.classification.DecisionTreeClassifier\r\nimport org.apache.spark.ml.classification.DecisionTreeClassificationModel\r\nimport org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator\r\nimport org.apache.spark.ml.feature.VectorIndexer\r\nimport org.apache.spark.ml.feature.PCA\r\n//index category index in raw feature\r\nval indexer \u003d new VectorIndexer().setInputCol(\"rawFeatures\").setOutputCol(\"rawFeaturesIndexed\").setMaxCategories(10)\r\n//PCA\r\nval pca \u003d new PCA().setInputCol(\"rawFeaturesIndexed\").setOutputCol(\"features\").setK(10)\r\n//label for multi class classifier\r\nval bucketizer \u003d new Bucketizer().setInputCol(\"ArrDelay\").setOutputCol(\"multiClassLabel\").setSplits(Array(Double.NegativeInfinity, 0.0, 15.0, Double.PositiveInfinity))\r\n// Train a DecisionTree model.\r\nval dt \u003d new DecisionTreeClassifier().setLabelCol(\"multiClassLabel\").setFeaturesCol(\"features\")\r\n// Chain all into a Pipeline\r\nval dtPipeline \u003d new Pipeline().setStages(Array(monthIndexer, dayofMonthIndexer, dayOfWeekIndexer, uniqueCarrierIndexer, originIndexer, assembler, indexer, pca, bucketizer, dt))\r\n// Train model. \r\nval dtModel \u003d dtPipeline.fit(trainingData)\r\n// Make predictions.\r\nval dtPredictions \u003d dtModel.transform(testingData)\r\n// Select example rows to display.\r\ndtPredictions.select(\"prediction\", \"multiClassLabel\", \"features\").show(20)",
+      "dateUpdated": "Sep 28, 2016 9:37:06 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475055156633_363352434",
+      "id": "20160928-093236_1464885988",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.ml.feature.Bucketizer\nimport org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.classification.DecisionTreeClassifier\nimport org.apache.spark.ml.classification.DecisionTreeClassificationModel\nimport org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator\nimport org.apache.spark.ml.feature.VectorIndexer\nimport org.apache.spark.ml.feature.PCA\nindexer: org.apache.spark.ml.feature.VectorIndexer \u003d vecIdx_a42b2fbf6148\npca: org.apache.spark.ml.feature.PCA \u003d pca_5d33a5deb948\nbucketizer: org.apache.spark.ml.feature.Bucketizer \u003d bucketizer_da1da67ecc17\ndt: org.apache.spark.ml.classification.DecisionTreeClassifier \u003d dtc_a103f27de487\ndtPipeline: org.apache.spark.ml.Pipeline \u003d pipeline_458cbc8859cf\ndtModel: org.apache.spark.ml.PipelineModel \u003d pipeline_458cbc8859cf\ndtPredictions: org.apache.spark.sql.DataFrame \u003d [Month: string, DayofMonth: string, DayOfWeek: string, DepTime: int, CRSDepTime: int, ArrTime: int, CRSArrTime: int, UniqueCarrier: string, ActualElapsedTime: int, CRSElapsedTime: int, AirTime: int, ArrDelay: double, DepDelay: int, Origin: string, Distance: int, MonthCat: double, DayofMonthCat: double, DayOfWeekCat: double, UniqueCarrierCat: double, OriginCat: double, rawFeatures: vector, rawFeaturesIndexed: vector, features: vector, multiClassLabel: double, rawPrediction: vector, probability: vector, prediction: double]\n+----------+---------------+--------------------+\n|prediction|multiClassLabel|            features|\n+----------+---------------+--------------------+\n|       2.0|            2.0|[-890.16371806274...|\n|       0.0|            0.0|[-1476.0409196071...|\n|       2.0|            2.0|[-1704.1748249105...|\n|       2.0|            1.0|[-1491.3095643357...|\n|       0.0|            1.0|[-1143.8832148695...|\n|       0.0|            0.0|[-1540.0101593876...|\n|       0.0|            0.0|[-1277.5984499610...|\n|       0.0|            1.0|[-1623.1696865875...|\n|       0.0|            0.0|[-1756.0416297038...|\n|       2.0|            2.0|[-1597.5993003206...|\n|       2.0|            2.0|[-2188.1379260644...|\n|       2.0|            2.0|[-1554.5158915909...|\n|       2.0|            2.0|[-2237.0512142287...|\n|       0.0|            0.0|[-1648.1730502721...|\n|       2.0|            2.0|[-1569.7772097798...|\n|       1.0|            0.0|[-1761.3536558909...|\n|       2.0|            2.0|[-1517.7387702931...|\n|       1.0|            0.0|[-1768.1302244053...|\n|       2.0|            2.0|[-1556.0265767965...|\n|       1.0|            0.0|[-1483.9039027513...|\n+----------+---------------+--------------------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Sep 28, 2016 9:32:36 AM",
+      "dateStarted": "Sep 28, 2016 9:37:06 AM",
+      "dateFinished": "Sep 28, 2016 9:38:01 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475055426856_-636242177",
+      "id": "20160928-093706_635849528",
+      "dateCreated": "Sep 28, 2016 9:37:06 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "ML_Pipeline",
+  "id": "2BXD4ZAG4",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

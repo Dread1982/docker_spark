@@ -1,0 +1,623 @@
+{
+  "paragraphs": [
+    {
+      "text": "val users \u003d sc.parallelize(List( (\"Alice\",21), (\"Bob\",12), (\"Bob\",18) ))",
+      "dateUpdated": "Sep 15, 2016 9:26:51 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473931562605_1890759503",
+      "id": "20160915-092602_522334673",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "users: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[0] at parallelize at \u003cconsole\u003e:29\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:26:02 AM",
+      "dateStarted": "Sep 15, 2016 9:26:51 AM",
+      "dateFinished": "Sep 15, 2016 9:28:26 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import com.datastax.spark.connector._",
+      "dateUpdated": "Sep 15, 2016 9:29:44 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473931611561_-579451030",
+      "id": "20160915-092651_486486150",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import com.datastax.spark.connector._\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:26:51 AM",
+      "dateStarted": "Sep 15, 2016 9:29:44 AM",
+      "dateFinished": "Sep 15, 2016 9:31:12 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable[(Int,Option[Float])](\"killr_video\",\"movies_by_actor\")\r\n  .select(\"release_year\",\"rating\")\r\n  .mapValues(v \u003d\u003e v.getOrElse(0.0))\r\n  .lookup(2014)\r\n  .foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:29:46 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473931671248_-1643438269",
+      "id": "20160915-092751_1545406934",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "5.4\n6.3\n6.0\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:27:51 AM",
+      "dateStarted": "Sep 15, 2016 9:29:47 AM",
+      "dateFinished": "Sep 15, 2016 9:31:47 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n  .select(\"release_year\")\r\n  .as( (year:Int) \u003d\u003e (year,1) )\r\n  .reduceByKey(_ + _)\r\n  .collect\r\n  .foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:33:55 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473931740649_1937358447",
+      "id": "20160915-092900_847776093",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(1984,1)\n(1998,1)\n(2000,3)\n(2010,2)\n(2014,3)\n(2001,2)\n(1994,2)\n(2006,1)\n(2012,1)\n(1986,2)\n(2003,2)\n(2005,1)\n(2015,3)\n(1992,1)\n(2013,2)\n(1990,2)\n(2004,4)\n(1985,2)\n(1995,2)\n(2016,1)\n(1999,3)\n(2009,2)\n(2011,3)\n(1991,1)\n(1997,2)\n(2007,2)\n(2017,1)\n(1993,2)\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:29:00 AM",
+      "dateStarted": "Sep 15, 2016 9:33:55 AM",
+      "dateFinished": "Sep 15, 2016 9:34:04 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n  .select(\"release_year\",\"title\",\"rating\")\r\n  .as( (y:Int,t:String,r:Option[Float]) \u003d\u003e (y,(t,r)) )\r\n  .filter{case (y,(t,r)) \u003d\u003e r.isDefined}\r\n  .mapValues{case (t,r) \u003d\u003e (t,r.get)}\r\n  .foldByKey( (\"\",0.0f) ){ case ((maxT,maxR),(t,r)) \u003d\u003e\r\n                               if (maxR \u003c r) (t,r)\r\n                               else (maxT,maxR) }\r\n  .sortByKey(false).collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:41:02 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473932035356_-1554595734",
+      "id": "20160915-093355_1418730464",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(2015,(Mortdecai,5.5))\n(2014,(Transcendence,6.3))\n(2013,(The Lone Ranger,6.5))\n(2012,(Dark Shadows,6.2))\n(2011,(Rango,7.3))\n(2010,(Alice in Wonderland,6.5))\n(2009,(Public Enemies,7.0))\n(2007,(Sweeney Todd: The Demon Barber of Fleet Street,7.5))\n(2006,(Pirates of the Caribbean: Dead Man\u0027s Chest,7.3))\n(2005,(Charlie and the Chocolate Factory,6.7))\n(2004,(Finding Neverland,7.8))\n(2003,(Pirates of the Caribbean: The Curse of the Black Pearl,8.1))\n(2001,(Blow,7.6))\n(2000,(Before Night Falls,7.3))\n(1999,(Sleepy Hollow,7.4))\n(1998,(Fear and Loathing in Las Vegas,7.7))\n(1997,(Donnie Brasco,7.8))\n(1995,(Dead Man,7.7))\n(1994,(Ed Wood,7.9))\n(1993,(What\u0027s Eating Gilbert Grape,7.8))\n(1992,(Arizona Dream,7.4))\n(1991,(Freddy\u0027s Dead: The Final Nightmare,4.9))\n(1990,(Edward Scissorhands,8.0))\n(1986,(Platoon,8.1))\n(1985,(Dummies,8.6))\n(1984,(A Nightmare on Elm Street,7.5))\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:33:55 AM",
+      "dateStarted": "Sep 15, 2016 9:41:02 AM",
+      "dateFinished": "Sep 15, 2016 9:41:08 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable[(Int,Option[Float])](\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027\").select(\"release_year\",\"rating\")\r\n  .filter(_._2.isDefined).mapValues(r \u003d\u003e r.get)\r\n  .combineByKey(\r\n   (rating:Float)                     \u003d\u003e(rating, 1),\r\n   (res:(Float,Int),rating:Float)     \u003d\u003e(res._1 + rating, res._2 + 1),\r\n   (res1:(Float,Int),res2:(Float,Int))\u003d\u003e(res1._1 + res1._1, res2._2 + res2._2)\r\n  )\r\n  .mapValues{case (sum,count) \u003d\u003e val avg \u003d sum / count; f\"$avg%1.1f\"}\r\n  .collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:46:46 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473932263575_1845551245",
+      "id": "20160915-093743_448137483",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(1984,7.5)\n(1998,7.7)\n(2000,6.9)\n(2010,6.3)\n(2014,5.9)\n(2001,7.2)\n(1994,7.4)\n(2006,7.3)\n(2012,6.2)\n(1986,6.8)\n(2003,7.3)\n(2005,6.7)\n(2015,5.5)\n(1992,7.4)\n(2013,6.3)\n(1990,7.3)\n(2004,6.8)\n(1985,6.9)\n(1995,7.0)\n(1999,6.5)\n(2009,6.9)\n(2011,6.7)\n(1991,4.9)\n(1997,7.2)\n(2007,7.3)\n(1993,7.5)\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:37:43 AM",
+      "dateStarted": "Sep 15, 2016 9:46:46 AM",
+      "dateFinished": "Sep 15, 2016 9:46:54 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n  .select(\"release_year\")\r\n  .as( (year:Int) \u003d\u003e (year,1) )\r\n  .countByKey\r\n  .foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:48:54 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473932806684_519287849",
+      "id": "20160915-094646_1175590224",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(1995,2)\n(2014,3)\n(1999,3)\n(2010,2)\n(1985,2)\n(1992,1)\n(2007,2)\n(2017,1)\n(2011,3)\n(2000,3)\n(2015,3)\n(2006,1)\n(1984,1)\n(1991,1)\n(2001,2)\n(2016,1)\n(1997,2)\n(1993,2)\n(2005,1)\n(1990,2)\n(2012,1)\n(2013,2)\n(1998,1)\n(2004,4)\n(2009,2)\n(1994,2)\n(2003,2)\n(1986,2)\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:46:46 AM",
+      "dateStarted": "Sep 15, 2016 9:48:54 AM",
+      "dateFinished": "Sep 15, 2016 9:48:58 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "//Grouping and Sorting",
+      "dateUpdated": "Sep 15, 2016 9:54:45 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473932876867_1317549872",
+      "id": "20160915-094756_362117937",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 15, 2016 9:47:56 AM",
+      "dateStarted": "Sep 15, 2016 9:54:46 AM",
+      "dateFinished": "Sep 15, 2016 9:54:46 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable[(String,Int,Set[String])](\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n  .select(\"title\",\"release_year\",\"genres\")\r\n  .flatMap{case (t,y,gs) \u003d\u003e gs.map( g \u003d\u003e(g, t + \", \" + y) )}\r\n  .groupByKey()\r\n  .collect\r\n  .foreach(println)",
+      "dateUpdated": "Sep 15, 2016 9:56:02 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473933285956_225016761",
+      "id": "20160915-095445_746004277",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(Fantasy,CompactBuffer(Alice Through the Looking Glass, 2016, Pirates of the Caribbean: On Stranger Tides, 2011, Alice in Wonderland, 2010, The Imaginarium of Doctor Parnassus, 2009, Pirates of the Caribbean: At World\u0027s End, 2007, Pirates of the Caribbean: Dead Man\u0027s Chest, 2006, Pirates of the Caribbean: The Curse of the Black Pearl, 2003, Dead Man, 1995, Arizona Dream, 1992, Edward Scissorhands, 1990))\n(Music,CompactBuffer(...And They Lived Happily Ever After, 2004, The Man Who Cried, 2000))\n(Western,CompactBuffer(The Lone Ranger, 2013, Dead Man, 1995))\n(Musical,CompactBuffer(Sweeney Todd: The Demon Barber of Fleet Street, 2007, Cry-Baby, 1990))\n(War,CompactBuffer(Platoon, 1986))\n(Family,CompactBuffer(Alice Through the Looking Glass, 2016, Alice in Wonderland, 2010, Charlie and the Chocolate Factory, 2005, Finding Neverland, 2004))\n(Horror,CompactBuffer(Yoga Hosers, 2015, Tusk, 2014, Dark Shadows, 2012, Sweeney Todd: The Demon Barber of Fleet Street, 2007, From Hell, 2001, Sleepy Hollow, 1999, Freddy\u0027s Dead: The Final Nightmare, 1991, A Nightmare on Elm Street, 1984))\n(Crime,CompactBuffer(Black Mass, 2015, Public Enemies, 2009, Blow, 2001, Donnie Brasco, 1997, Nick of Time, 1995))\n(Animation,CompactBuffer(Rango, 2011))\n(Biography,CompactBuffer(Public Enemies, 2009, Finding Neverland, 2004, Blow, 2001, Before Night Falls, 2000, Donnie Brasco, 1997, Ed Wood, 1994))\n(Sci-Fi,CompactBuffer(Into the Woods, 2014, The Astronaut\u0027s Wife, 1999))\n(Comedy,CompactBuffer(Pirates of the Caribbean: Dead Men Tell No Tales, 2017, Yoga Hosers, 2015, Mortdecai, 2015, Tusk, 2014, Dark Shadows, 2012, The Rum Diary, 2011, Rango, 2011, Charlie and the Chocolate Factory, 2005, ...And They Lived Happily Ever After, 2004, Fear and Loathing in Las Vegas, 1998, Don Juan DeMarco, 1994, Ed Wood, 1994, Benny \u0026 Joon, 1993, Arizona Dream, 1992, Freddy\u0027s Dead: The Final Nightmare, 1991, Cry-Baby, 1990, Private Resort, 1985))\n(Mystery,CompactBuffer(Mortdecai, 2015, Transcendence, 2014, The Imaginarium of Doctor Parnassus, 2009, Secret Window, 2004, From Hell, 2001, Sleepy Hollow, 1999, The Ninth Gate, 1999))\n(Thriller,CompactBuffer(Yoga Hosers, 2015, The Tourist, 2010, Secret Window, 2004, Once Upon a Time in Mexico, 2003, From Hell, 2001, The Ninth Gate, 1999, The Astronaut\u0027s Wife, 1999, Freddy\u0027s Dead: The Final Nightmare, 1991, Slow Burn, 1986))\n(Adventure,CompactBuffer(Pirates of the Caribbean: Dead Men Tell No Tales, 2017, Alice Through the Looking Glass, 2016, Into the Woods, 2014, The Lone Ranger, 2013, Rango, 2011, Pirates of the Caribbean: On Stranger Tides, 2011, Alice in Wonderland, 2010, The Imaginarium of Doctor Parnassus, 2009, Pirates of the Caribbean: At World\u0027s End, 2007, Pirates of the Caribbean: Dead Man\u0027s Chest, 2006, Charlie and the Chocolate Factory, 2005, Pirates of the Caribbean: The Curse of the Black Pearl, 2003))\n(Drama,CompactBuffer(Black Mass, 2015, Tusk, 2014, Transcendence, 2014, Lucky Them, 2013, The Rum Diary, 2011, Public Enemies, 2009, Sweeney Todd: The Demon Barber of Fleet Street, 2007, The Libertine, 2004, Finding Neverland, 2004, ...And They Lived Happily Ever After, 2004, Blow, 2001, Before Night Falls, 2000, Chocolat, 2000, The Man Who Cried, 2000, Sleepy Hollow, 1999, The Astronaut\u0027s Wife, 1999, The Brave, 1997, Donnie Brasco, 1997, Dead Man, 1995, Nick of Time, 1995, Don Juan DeMarco, 1994, Ed Wood, 1994, What\u0027s Eating Gilbert Grape, 1993, Benny \u0026 Joon, 1993, Arizona Dream, 1992, Edward Scissorhands, 1990, Platoon, 1986, Slow Burn, 1986, Dummies, 1985))\n(Romance,CompactBuffer(Transcendence, 2014, The Tourist, 2010, Chocolat, 2000, The Man Who Cried, 2000, Don Juan DeMarco, 1994, Benny \u0026 Joon, 1993, Edward Scissorhands, 1990))\n(Action,CompactBuffer(Pirates of the Caribbean: Dead Men Tell No Tales, 2017, Mortdecai, 2015, Black Mass, 2015, The Lone Ranger, 2013, Pirates of the Caribbean: On Stranger Tides, 2011, The Tourist, 2010, Pirates of the Caribbean: At World\u0027s End, 2007, Pirates of the Caribbean: Dead Man\u0027s Chest, 2006, Pirates of the Caribbean: The Curse of the Black Pearl, 2003, Once Upon a Time in Mexico, 2003, Nick of Time, 1995))\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:54:45 AM",
+      "dateStarted": "Sep 15, 2016 9:56:03 AM",
+      "dateFinished": "Sep 15, 2016 9:56:09 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val johnnyMovies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n                     .where(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n                     .keyBy(row \u003d\u003e row.getInt(\"release_year\"))\r\nval tomMovies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n                     .where(\"actor \u003d \u0027Tom Hanks\u0027\")\r\n                     .keyBy(row \u003d\u003e row.getInt(\"release_year\"))\r\njohnnyMovies.cogroup(tomMovies)\r\n            .collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:00:46 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473933362927_-767311949",
+      "id": "20160915-095602_674756765",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "johnnyMovies: org.apache.spark.rdd.RDD[(Int, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[59] at keyBy at \u003cconsole\u003e:34\ntomMovies: org.apache.spark.rdd.RDD[(Int, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[62] at keyBy at \u003cconsole\u003e:34\n(1984,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1984, movie_id: 54061523-9c86-4f56-a258-a7ce28f649eb, genres: {Horror}, rating: 7.5, title: A Nightmare on Elm Street}),CompactBuffer()))\n(1998,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1998, movie_id: 1a1e23a8-9e39-45d2-b6d6-156b0f27affd, genres: {Comedy}, rating: 7.7, title: Fear and Loathing in Las Vegas}),CompactBuffer()))\n(2010,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: 2abfb669-eb3b-4579-b4e5-7d400cd4bfe0, genres: {Action,Romance,Thriller}, rating: 6.0, title: The Tourist}, CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: ec0ac04a-db2e-41fa-a2da-b9e6fd7aecb4, genres: {Adventure,Family,Fantasy}, rating: 6.5, title: Alice in Wonderland}),CompactBuffer()))\n(2000,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2c37bb1d-7017-4dbb-9ca1-e2b2cbe1fb35, genres: {Biography,Drama}, rating: 7.3, title: Before Night Falls}, CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2f9fc124-b3d3-4792-99ee-cb158ab1c6f7, genres: {Drama,Romance}, rating: 7.3, title: Chocolat}, CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: f5e99d71-a8bf-4faa-8c99-5c0664689c7c, genres: {Drama,Music,Romance}, rating: 6.2, title: The Man Who Cried}),CompactBuffer()))\n(2014,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 34074a6f-b015-491c-9895-84ec4b942610, genres: {Comedy,Drama,Horror}, rating: 5.4, title: Tusk}, CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 740ba4e5-6787-400e-bc92-55d6b1747ffb, genres: {Drama,Mystery,Romance}, rating: 6.3, title: Transcendence}, CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: f1ebd8a2-54d3-4e31-a450-57e06d269972, genres: {Adventure,Sci-Fi}, rating: 6.0, title: Into the Woods}),CompactBuffer()))\n(2001,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: d08ba9de-996e-4bf3-9eed-698da31c1636, genres: {Biography,Crime,Drama}, rating: 7.6, title: Blow}, CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: ef990d55-e86f-423d-9dd1-bd8468516fb0, genres: {Horror,Mystery,Thriller}, rating: 6.8, title: From Hell}),CompactBuffer()))\n(1994,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: 87945d02-36b0-42e8-a44b-a5d7f6a7e46a, genres: {Comedy,Drama,Romance}, rating: 6.8, title: Don Juan DeMarco}, CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: efde567a-d05a-4409-b9a3-6effc07d0941, genres: {Biography,Comedy,Drama}, rating: 7.9, title: Ed Wood}),CompactBuffer()))\n(2012,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2012, movie_id: 0ef58cb4-1968-4207-820f-65d90825cf1e, genres: {Comedy,Horror}, rating: 6.2, title: Dark Shadows}),CompactBuffer()))\n(2006,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2006, movie_id: ad8c414a-6ae7-4336-bac9-74f5bd4f3c7c, genres: {Action,Adventure,Fantasy}, rating: 7.3, title: Pirates of the Caribbean: Dead Man\u0027s Chest}),CompactBuffer()))\n(1986,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4b1b5484-d30b-47d4-bbd2-9d9c71b666f8, genres: {Drama,War}, rating: 8.1, title: Platoon}, CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4d2a3ad5-8a37-411b-8330-5ec1bada9940, genres: {Drama,Thriller}, rating: 5.4, title: Slow Burn}),CompactBuffer()))\n(2003,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 16dcb95e-ebf7-497d-9f83-5a641ef0654c, genres: {Action,Adventure,Fantasy}, rating: 8.1, title: Pirates of the Caribbean: The Curse of the Black Pearl}, CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 21c95e73-0e40-4d87-ab34-9da6089ff2a9, genres: {Action,Thriller}, rating: 6.4, title: Once Upon a Time in Mexico}),CompactBuffer()))\n(2005,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2005, movie_id: b50e347b-0a8a-4e47-99b0-fcfb3a8ac552, genres: {Adventure,Comedy,Family}, rating: 6.7, title: Charlie and the Chocolate Factory}),CompactBuffer()))\n(2015,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: 7d3bd9fb-d4c6-4240-aec4-f235ea6e307c, genres: {Comedy,Horror,Thriller}, rating: null, title: Yoga Hosers}, CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b363a377-1116-48c6-8419-742a1d99b44c, genres: {Action,Comedy,Mystery}, rating: 5.5, title: Mortdecai}, CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b8c3f19a-051e-4811-a6f4-204ad79dbf6b, genres: {Action,Crime,Drama}, rating: null, title: Black Mass}),CompactBuffer()))\n(2013,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: 254f8e05-7bd8-4530-a85c-b9d6a3bee47b, genres: {Action,Adventure,Western}, rating: 6.5, title: The Lone Ranger}, CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: eab3445e-e820-4492-b0cb-e25d36419605, genres: {Drama}, rating: 6.0, title: Lucky Them}),CompactBuffer()))\n(1992,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1992, movie_id: e8394181-eb3f-446e-8689-3a635c65cbc8, genres: {Comedy,Drama,Fantasy}, rating: 7.4, title: Arizona Dream}),CompactBuffer()))\n(1990,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: 5cced2e1-0454-4f77-9c2a-368fb6adce2a, genres: {Comedy,Musical}, rating: 6.5, title: Cry-Baby}, CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: b0776872-3a64-454a-8de5-36b674a94928, genres: {Drama,Fantasy,Romance}, rating: 8.0, title: Edward Scissorhands}),CompactBuffer()))\n(2004,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: 745a3d97-6273-482a-ad24-94ca2a71eaaf, genres: {Drama}, rating: 6.4, title: The Libertine}, CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: bfe6aaaf-4d1d-41db-ac97-2588430469d0, genres: {Mystery,Thriller}, rating: 6.6, title: Secret Window}, CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: c12fecdb-f829-4841-8b8e-66d4ae42a2dd, genres: {Biography,Drama,Family}, rating: 7.8, title: Finding Neverland}, CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: d90fb3c1-4dfe-4b5c-a7cd-c555f720b5d9, genres: {Comedy,Drama,Music}, rating: 6.6, title: ...And They Lived Happily Ever After}),CompactBuffer()))\n(1985,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: 081cfd7c-16e1-4c12-910f-1b7c7f012e6a, genres: {Comedy}, rating: 5.2, title: Private Resort}, CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: e83b9aea-47c0-41ba-ae83-ae3ffde1deaf, genres: {Drama}, rating: 8.6, title: Dummies}),CompactBuffer()))\n(1995,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 16d59ffc-a669-4f97-bf8e-ed5538eda02c, genres: {Drama,Fantasy,Western}, rating: 7.7, title: Dead Man}, CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 2daf1017-d76c-4410-b03a-14faee525416, genres: {Action,Crime,Drama}, rating: 6.3, title: Nick of Time}),CompactBuffer()))\n(2016,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2016, movie_id: 87a7b583-b817-49f7-9a45-7129ea6910e3, genres: {Adventure,Family,Fantasy}, rating: null, title: Alice Through the Looking Glass}),CompactBuffer()))\n(1999,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5022e18b-3b9d-437d-a87c-f68b05bc1830, genres: {Drama,Horror,Mystery}, rating: 7.4, title: Sleepy Hollow}, CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5864940a-3a80-4f87-8138-c39db7b3b383, genres: {Mystery,Thriller}, rating: 6.7, title: The Ninth Gate}, CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 8b93eb2b-6286-4601-adff-467f88023d5d, genres: {Drama,Sci-Fi,Thriller}, rating: 5.3, title: The Astronaut\u0027s Wife}),CompactBuffer()))\n(2009,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 2fb2f5c8-ec99-4f39-b98c-ffc498ff9475, genres: {Adventure,Fantasy,Mystery}, rating: 6.9, title: The Imaginarium of Doctor Parnassus}, CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 9932e86e-276d-421d-abfc-6b5d00db62da, genres: {Biography,Crime,Drama}, rating: 7.0, title: Public Enemies}),CompactBuffer()))\n(2011,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: 2bd106bd-f3a8-4b48-8952-17a4feec690d, genres: {Comedy,Drama}, rating: 6.2, title: The Rum Diary}, CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: b541bfa1-463c-4ac1-b419-919ba3c6483c, genres: {Adventure,Animation,Comedy}, rating: 7.3, title: Rango}, CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: e96327f9-730c-40ff-93b7-c4a70aa42f7b, genres: {Action,Adventure,Fantasy}, rating: 6.7, title: Pirates of the Caribbean: On Stranger Tides}),CompactBuffer()))\n(1991,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1991, movie_id: 4df7a947-dbbc-4c86-84e8-c2678285e7e5, genres: {Comedy,Horror,Thriller}, rating: 4.9, title: Freddy\u0027s Dead: The Final Nightmare}),CompactBuffer()))\n(2007,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 065e455e-7162-487e-bee4-9786a4b830f5, genres: {Action,Adventure,Fantasy}, rating: 7.1, title: Pirates of the Caribbean: At World\u0027s End}, CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 301a6a34-6f57-4b62-a9c9-830a2e052bdc, genres: {Drama,Horror,Musical}, rating: 7.5, title: Sweeney Todd: The Demon Barber of Fleet Street}),CompactBuffer()))\n(1997,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: 48adcc21-8bae-42aa-b68f-f6adc4bc001e, genres: {Drama}, rating: 6.5, title: The Brave}, CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: fc4b874e-dba4-424a-af2b-0f77f605f262, genres: {Biography,Crime,Drama}, rating: 7.8, title: Donnie Brasco}),CompactBuffer()))\n(2017,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 2017, movie_id: 4c760c80-735e-4191-b909-e6d124341a03, genres: {Action,Adventure,Comedy}, rating: null, title: Pirates of the Caribbean: Dead Men Tell No Tales}),CompactBuffer()))\n(1993,(CompactBuffer(CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: 579491ce-d4c5-49c4-a0ea-2e31444a32ed, genres: {Drama}, rating: 7.8, title: What\u0027s Eating Gilbert Grape}, CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: bd2fbcbf-eaa0-419d-ab1b-ee9f213cefb2, genres: {Comedy,Drama,Romance}, rating: 7.2, title: Benny \u0026 Joon}),CompactBuffer()))\n"
+      },
+      "dateCreated": "Sep 15, 2016 9:56:02 AM",
+      "dateStarted": "Sep 15, 2016 10:00:46 AM",
+      "dateFinished": "Sep 15, 2016 10:00:54 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003e 2010\")\r\n  .select(\"title\",\"release_year\",\"rating\")\r\n  .as( (t:String, y:Int, r:Option[Float]) \u003d\u003e (r.getOrElse(0.0f),(t,y)) )\r\n  .sortByKey(false)\r\n  .collect\r\n  .foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:03:21 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473933646824_-1993908412",
+      "id": "20160915-100046_1074831778",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(7.3,(Rango,2011))\n(6.7,(Pirates of the Caribbean: On Stranger Tides,2011))\n(6.5,(The Lone Ranger,2013))\n(6.3,(Transcendence,2014))\n(6.2,(Dark Shadows,2012))\n(6.2,(The Rum Diary,2011))\n(6.0,(Into the Woods,2014))\n(6.0,(Lucky Them,2013))\n(5.5,(Mortdecai,2015))\n(5.4,(Tusk,2014))\n(0.0,(Pirates of the Caribbean: Dead Men Tell No Tales,2017))\n(0.0,(Alice Through the Looking Glass,2016))\n(0.0,(Yoga Hosers,2015))\n(0.0,(Black Mass,2015))\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:00:46 AM",
+      "dateStarted": "Sep 15, 2016 10:03:21 AM",
+      "dateFinished": "Sep 15, 2016 10:03:25 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// Joins",
+      "dateUpdated": "Sep 15, 2016 10:21:30 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473933801203_-800989251",
+      "id": "20160915-100321_1613407743",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 15, 2016 10:03:21 AM",
+      "dateStarted": "Sep 15, 2016 10:21:30 AM",
+      "dateFinished": "Sep 15, 2016 10:21:31 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val playlists \u003d\r\n    sc.cassandraTable(\"killr_video\",\"playlists_by_user\")\r\n      .select(\"user_id\",\"playlist_name\",\"release_year\",\"title\",\"movie_id\")\r\n      .as((u:java.util.UUID,p:String,y:Int,t:String,m:java.util.UUID) \u003d\u003e\r\n          (m,(u,p,y,t)))\r\n\r\nval movies \u003d\r\n    sc.cassandraTable(\"killr_video\",\"movies\")\r\n      .select(\"movie_id\",\"genres\",\"rating\")\r\n      .as((m:java.util.UUID,g:Set[String],r:Option[Float]) \u003d\u003e\r\n          (m,(g,r)))\r\n\r\nplaylists.join(movies)\r\n         .map{case (m,((u,p,y,t),(g,r))) \u003d\u003e (u,p,y,t,m,g,r)}\r\n         .saveToCassandra(\"killr_video\",\"playlists_by_user\")",
+      "dateUpdated": "Sep 15, 2016 10:33:50 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473934890814_-709058335",
+      "id": "20160915-102130_1451741986",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "playlists: com.datastax.spark.connector.rdd.CassandraRDD[(java.util.UUID, (java.util.UUID, String, Int, String))] \u003d CassandraTableScanRDD[72] at RDD at CassandraRDD.scala:15\nmovies: com.datastax.spark.connector.rdd.CassandraRDD[(java.util.UUID, (Set[String], Option[Float]))] \u003d CassandraTableScanRDD[75] at RDD at CassandraRDD.scala:15\njava.util.NoSuchElementException: Columns not found in table killr_video.movies: genres, rating\n\tat com.datastax.spark.connector.SomeColumns.selectFrom(ColumnSelector.scala:38)\n\tat com.datastax.spark.connector.rdd.CassandraTableRowReaderProvider$class.rowReader(CassandraTableRowReaderProvider.scala:48)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.rowReader$lzycompute(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.rowReader(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableRowReaderProvider$class.verify(CassandraTableRowReaderProvider.scala:147)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.verify(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.getPartitions(CassandraTableScanRDD.scala:231)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:239)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:237)\n\tat scala.Option.getOrElse(Option.scala:120)\n\tat org.apache.spark.rdd.RDD.partitions(RDD.scala:237)\n\tat org.apache.spark.Partitioner$$anonfun$2.apply(Partitioner.scala:58)\n\tat org.apache.spark.Partitioner$$anonfun$2.apply(Partitioner.scala:58)\n\tat scala.math.Ordering$$anon$5.compare(Ordering.scala:122)\n\tat java.util.TimSort.countRunAndMakeAscending(TimSort.java:355)\n\tat java.util.TimSort.sort(TimSort.java:220)\n\tat java.util.Arrays.sort(Arrays.java:1438)\n\tat scala.collection.SeqLike$class.sorted(SeqLike.scala:615)\n\tat scala.collection.AbstractSeq.sorted(Seq.scala:40)\n\tat scala.collection.SeqLike$class.sortBy(SeqLike.scala:594)\n\tat scala.collection.AbstractSeq.sortBy(Seq.scala:40)\n\tat org.apache.spark.Partitioner$.defaultPartitioner(Partitioner.scala:58)\n\tat org.apache.spark.rdd.PairRDDFunctions$$anonfun$join$2.apply(PairRDDFunctions.scala:651)\n\tat org.apache.spark.rdd.PairRDDFunctions$$anonfun$join$2.apply(PairRDDFunctions.scala:651)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:316)\n\tat org.apache.spark.rdd.PairRDDFunctions.join(PairRDDFunctions.scala:650)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:37)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:44)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:46)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:48)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:50)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:52)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:54)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:56)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:58)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:60)\n\tat \u003cinit\u003e(\u003cconsole\u003e:62)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:66)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1065)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1346)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:840)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:871)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:819)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:21:30 AM",
+      "dateStarted": "Sep 15, 2016 10:33:50 AM",
+      "dateFinished": "Sep 15, 2016 10:33:56 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// set operations",
+      "dateUpdated": "Sep 15, 2016 10:33:45 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473935167339_-738882691",
+      "id": "20160915-102607_652082338",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 15, 2016 10:26:07 AM",
+      "dateStarted": "Sep 15, 2016 10:33:45 AM",
+      "dateFinished": "Sep 15, 2016 10:33:46 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val playlists \u003d\r\n    sc.cassandraTable(\"killr_video\",\"playlists_by_user\")\r\n      .keyBy(row \u003d\u003e row.getUUID(\"movie_id\"))\r\n\r\nval movies \u003d\r\n    sc.cassandraTable(\"killr_video\",\"movies\")\r\n      .select(\"movie_id\")\r\n      .keyBy(row \u003d\u003e row.getUUID(\"movie_id\"))\r\n\r\nplaylists.leftOuterJoin(movies)\r\n         .filter{case (m,(rowP,rowM)) \u003d\u003e !rowM.isDefined}\r\n         .map{case (m,(rowP,rowM)) \u003d\u003e rowP}\r\n         .collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:35:06 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473935625785_-108236560",
+      "id": "20160915-103345_1063928291",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "playlists: org.apache.spark.rdd.RDD[(java.util.UUID, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[77] at keyBy at \u003cconsole\u003e:34\nmovies: org.apache.spark.rdd.RDD[(java.util.UUID, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[80] at keyBy at \u003cconsole\u003e:35\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:33:45 AM",
+      "dateStarted": "Sep 15, 2016 10:35:07 AM",
+      "dateFinished": "Sep 15, 2016 10:35:16 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val A \u003d sc.parallelize(Array((\"k1\",\"v1\"), (\"k2\",\"v2\"), (\"k1\",\"v3\"), (\"k3\",\"v4\")))\r\nval B \u003d sc.parallelize(Array((\"k1\",\"w1\"), (\"k2\",\"w2\"), (\"k2\",\"w3\"), (\"k4\",\"w4\")))\r\n\r\nA.union(B)\r\n.collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:38:44 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473935706996_983050883",
+      "id": "20160915-103506_91411742",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "A: org.apache.spark.rdd.RDD[(String, String)] \u003d ParallelCollectionRDD[92] at parallelize at \u003cconsole\u003e:32\nB: org.apache.spark.rdd.RDD[(String, String)] \u003d ParallelCollectionRDD[93] at parallelize at \u003cconsole\u003e:32\n(k1,v1)\n(k2,v2)\n(k1,v3)\n(k3,v4)\n(k1,w1)\n(k2,w2)\n(k2,w3)\n(k4,w4)\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:35:06 AM",
+      "dateStarted": "Sep 15, 2016 10:38:44 AM",
+      "dateFinished": "Sep 15, 2016 10:38:48 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val A \u003d sc.parallelize(Array((\"k1\",\"v1\"), (\"k2\",\"v2\"), (\"k1\",\"v3\"), (\"k3\",\"v4\")))\r\nval B \u003d sc.parallelize(Array((\"k1\",\"w1\"), (\"k2\",\"w2\"), (\"k2\",\"w3\"), (\"k4\",\"w4\")))\r\n\r\nA.groupByKey\r\n .join(B.groupByKey)\r\n .flatMapValues{case (aList,bList) \u003d\u003e aList ++ bList}\r\n .collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:39:49 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473935805164_647119121",
+      "id": "20160915-103645_446299669",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "A: org.apache.spark.rdd.RDD[(String, String)] \u003d ParallelCollectionRDD[106] at parallelize at \u003cconsole\u003e:32\nB: org.apache.spark.rdd.RDD[(String, String)] \u003d ParallelCollectionRDD[107] at parallelize at \u003cconsole\u003e:32\n(k1,v1)\n(k1,v3)\n(k1,w1)\n(k2,v2)\n(k2,w2)\n(k2,w3)\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:36:45 AM",
+      "dateStarted": "Sep 15, 2016 10:39:49 AM",
+      "dateFinished": "Sep 15, 2016 10:39:53 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val playlists \u003d\r\n    sc.cassandraTable(\"killr_video\",\"playlists_by_user\")\r\n      .keyBy(row \u003d\u003e row.getUUID(\"movie_id\"))\r\n\r\nval movies \u003d\r\n    sc.cassandraTable(\"killr_video\",\"movies\")\r\n      .select(\"movie_id\")\r\n      .keyBy(row \u003d\u003e row.getUUID(\"movie_id\"))\r\n\r\nplaylists.subtractByKey(movies)\r\n         .collect.foreach(println)",
+      "dateUpdated": "Sep 15, 2016 10:42:00 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473935926358_1821524361",
+      "id": "20160915-103846_498905486",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "playlists: org.apache.spark.rdd.RDD[(java.util.UUID, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[115] at keyBy at \u003cconsole\u003e:34\nmovies: org.apache.spark.rdd.RDD[(java.util.UUID, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[118] at keyBy at \u003cconsole\u003e:35\n"
+      },
+      "dateCreated": "Sep 15, 2016 10:38:46 AM",
+      "dateStarted": "Sep 15, 2016 10:42:01 AM",
+      "dateFinished": "Sep 15, 2016 10:42:10 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473936120847_959928199",
+      "id": "20160915-104200_94284227",
+      "dateCreated": "Sep 15, 2016 10:42:00 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "6-Key_Value_Pairs",
+  "id": "2BVXAJQUE",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

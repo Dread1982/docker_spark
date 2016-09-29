@@ -1,0 +1,290 @@
+{
+  "paragraphs": [
+    {
+      "text": "val movies \u003d sc.parallelize(List((\"Alice in Wonderland\",2016), (\"Alice Through the Looking Glass\",2010)))\nprintln(movies.partitions.size)",
+      "dateUpdated": "Sep 16, 2016 8:58:54 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016270161_1702995478",
+      "id": "20160916-085750_1053423340",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[0] at parallelize at \u003cconsole\u003e:29\n2\n"
+      },
+      "dateCreated": "Sep 16, 2016 8:57:50 AM",
+      "dateStarted": "Sep 16, 2016 8:58:54 AM",
+      "dateFinished": "Sep 16, 2016 9:00:30 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import com.datastax.spark.connector._",
+      "dateUpdated": "Sep 16, 2016 9:01:43 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016486773_-2075917918",
+      "id": "20160916-090126_296340538",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import com.datastax.spark.connector._\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:01:26 AM",
+      "dateStarted": "Sep 16, 2016 9:01:43 AM",
+      "dateFinished": "Sep 16, 2016 9:01:45 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val interactions \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\nprintln(interactions.partitions.size)",
+      "dateUpdated": "Sep 16, 2016 9:01:46 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016334594_1705932262",
+      "id": "20160916-085854_1748772625",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "interactions: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] \u003d CassandraTableScanRDD[1] at RDD at CassandraRDD.scala:15\n1\n"
+      },
+      "dateCreated": "Sep 16, 2016 8:58:54 AM",
+      "dateStarted": "Sep 16, 2016 9:01:46 AM",
+      "dateFinished": "Sep 16, 2016 9:01:54 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "println(movies.partitioner)\nprintln(interactions.partitioner)",
+      "dateUpdated": "Sep 16, 2016 9:02:36 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016479239_-2104019912",
+      "id": "20160916-090119_1399203376",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "None\nNone\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:01:19 AM",
+      "dateStarted": "Sep 16, 2016 9:02:36 AM",
+      "dateFinished": "Sep 16, 2016 9:02:38 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val moviesByYear \u003d movies.map{case (t,y) \u003d\u003e (y,t)}.groupByKey\r\nprintln(moviesByYear.partitioner)",
+      "dateUpdated": "Sep 16, 2016 9:02:57 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016540971_-2141447825",
+      "id": "20160916-090220_2074622108",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "moviesByYear: org.apache.spark.rdd.RDD[(Int, Iterable[String])] \u003d ShuffledRDD[3] at groupByKey at \u003cconsole\u003e:34\nSome(org.apache.spark.HashPartitioner@2)\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:02:20 AM",
+      "dateStarted": "Sep 16, 2016 9:02:57 AM",
+      "dateFinished": "Sep 16, 2016 9:03:01 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "println(sc.defaultParallelism)",
+      "dateUpdated": "Sep 16, 2016 9:03:48 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016577675_995638176",
+      "id": "20160916-090257_408696322",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "2\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:02:57 AM",
+      "dateStarted": "Sep 16, 2016 9:03:48 AM",
+      "dateFinished": "Sep 16, 2016 9:03:49 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val moviesByYear \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n                     .keyBy(row \u003d\u003e row.getInt(\"release_year\"))\r\n                     .groupByKey\r\n// Partitioning properties: HashPartitioner@3\r\nprintln(moviesByYear.partitioner)\r\n\r\nval moviesByYear2010 \u003d moviesByYear.filter{case (y,rows) \u003d\u003e y \u003d\u003d 2010}\r\n// Partitioning properties: HashPartitioner@3\r\nprintln(moviesByYear2010.partitioner)\r\n\r\nval movies2010 \u003d moviesByYear2010.flatMapValues(rows \u003d\u003e rows)\r\n// Partitioning properties: HashPartitioner@3\r\nprintln(movies2010.partitioner)\r\n\r\nval capitalizedMovies2010 \u003d movies2010.map{case (y,row) \u003d\u003e (y,row.getString(\"title\").capitalize)}\r\n// Partitioning properties: 3, None\r\nprintln(capitalizedMovies2010.partitioner)",
+      "dateUpdated": "Sep 16, 2016 9:11:28 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474016628053_-1098104042",
+      "id": "20160916-090348_1505812488",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "moviesByYear: org.apache.spark.rdd.RDD[(Int, Iterable[com.datastax.spark.connector.CassandraRow])] \u003d ShuffledRDD[12] at groupByKey at \u003cconsole\u003e:34\nSome(org.apache.spark.HashPartitioner@1)\nmoviesByYear2010: org.apache.spark.rdd.RDD[(Int, Iterable[com.datastax.spark.connector.CassandraRow])] \u003d MapPartitionsRDD[13] at filter at \u003cconsole\u003e:34\nSome(org.apache.spark.HashPartitioner@1)\nmovies2010: org.apache.spark.rdd.RDD[(Int, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[14] at flatMapValues at \u003cconsole\u003e:36\nSome(org.apache.spark.HashPartitioner@1)\ncapitalizedMovies2010: org.apache.spark.rdd.RDD[(Int, String)] \u003d MapPartitionsRDD[15] at map at \u003cconsole\u003e:38\nNone\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:03:48 AM",
+      "dateStarted": "Sep 16, 2016 9:11:28 AM",
+      "dateFinished": "Sep 16, 2016 9:11:35 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "println(sc.defaultParallelism)\r\n// Sample output: 3\r\n\r\nval movies \u003d sc.parallelize(List((\"Alice in Wonderland\",2016), (\"Alice Through the Looking Glass\",2010)))\r\nprintln(movies.partitions.size)\r\n// Sample output: 3\r\n\r\nprintln(movies.repartition(2*sc.defaultParallelism).partitions.size)\r\n// Sample output: 6\r\n\r\nprintln(movies.coalesce(4).partitions.size)\r\n// Sample output: 4",
+      "dateUpdated": "Sep 16, 2016 9:39:09 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474017025667_1939090620",
+      "id": "20160916-091025_307513682",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "2\nmovies: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[16] at parallelize at \u003cconsole\u003e:32\n2\n4\n2\n"
+      },
+      "dateCreated": "Sep 16, 2016 9:10:25 AM",
+      "dateStarted": "Sep 16, 2016 9:39:09 AM",
+      "dateFinished": "Sep 16, 2016 9:39:13 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474018749706_1816418662",
+      "id": "20160916-093909_1317416271",
+      "dateCreated": "Sep 16, 2016 9:39:09 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "7-Partitioning",
+  "id": "2BYNKFYQF",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

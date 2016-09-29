@@ -1,0 +1,919 @@
+{
+  "paragraphs": [
+    {
+      "text": "import org.apache.spark.sql.cassandra.CassandraSQLContext",
+      "dateUpdated": "Sep 18, 2016 6:33:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222614654_-2132686478",
+      "id": "20160918-181654_1064912062",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.sql.cassandra.CassandraSQLContext\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:16:54 PM",
+      "dateStarted": "Sep 18, 2016 6:33:14 PM",
+      "dateFinished": "Sep 18, 2016 6:33:15 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val csc \u003d new CassandraSQLContext(sc)",
+      "dateUpdated": "Sep 18, 2016 6:33:15 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222417099_-1593377434",
+      "id": "20160918-181337_308117039",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "csc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@1fd449d2\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:13:37 PM",
+      "dateStarted": "Sep 18, 2016 6:33:16 PM",
+      "dateFinished": "Sep 18, 2016 6:33:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d csc.sql(\"SELECT * FROM killr_video.movies_by_actor\")",
+      "dateUpdated": "Sep 18, 2016 6:17:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222425023_-1247656739",
+      "id": "20160918-181345_969923721",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:13:45 PM",
+      "dateStarted": "Sep 18, 2016 6:17:41 PM",
+      "dateFinished": "Sep 18, 2016 6:17:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "csc.sql(\" SELECT COUNT(*) AS total         \" +\r\n        \" FROM killr_video.movies_by_actor \" +\r\n        \" WHERE actor \u003d \u0027Johnny Depp\u0027      \")\r\n   .show",
+      "dateUpdated": "Sep 18, 2016 6:18:01 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222661247_-693127949",
+      "id": "20160918-181741_876528345",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+-----+\n|total|\n+-----+\n|   54|\n+-----+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:17:41 PM",
+      "dateStarted": "Sep 18, 2016 6:18:01 PM",
+      "dateFinished": "Sep 18, 2016 6:18:29 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d csc\r\n    .read\r\n    .format(\"org.apache.spark.sql.cassandra\")\r\n    .options(Map( \"keyspace\" -\u003e \"killr_video\", \"table\" -\u003e \"movies_by_actor\" ))\r\n    .load\r\n\r\nmovies.filter(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n      .agg(Map(\"*\" -\u003e \"count\"))\r\n      .withColumnRenamed(\"count(1)\", \"total\")\r\n      .show",
+      "dateUpdated": "Sep 18, 2016 6:19:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222681042_1719293627",
+      "id": "20160918-181801_1062791261",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n+-----+\n|total|\n+-----+\n|   54|\n+-----+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:18:01 PM",
+      "dateStarted": "Sep 18, 2016 6:19:03 PM",
+      "dateFinished": "Sep 18, 2016 6:19:19 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import csc.implicits._\r\n\r\ncase class Movie(title: String, year: Int)\r\n\r\nval rdd \u003d sc.parallelize(Array( Movie(\"Alice in Wonderland\", 2010) ))\r\n\r\nval df  \u003d rdd.toDF()",
+      "dateUpdated": "Sep 18, 2016 6:20:53 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222719351_1375590266",
+      "id": "20160918-181839_562902450",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import csc.implicits._\ndefined class Movie\nrdd: org.apache.spark.rdd.RDD[Movie] \u003d ParallelCollectionRDD[31] at parallelize at \u003cconsole\u003e:37\ndf: org.apache.spark.sql.DataFrame \u003d [title: string, year: int]\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:18:39 PM",
+      "dateStarted": "Sep 18, 2016 6:20:53 PM",
+      "dateFinished": "Sep 18, 2016 6:21:08 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.show",
+      "dateUpdated": "Sep 18, 2016 6:21:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222853617_709790778",
+      "id": "20160918-182053_1782163876",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+-------------------+----+\n|              title|year|\n+-------------------+----+\n|Alice in Wonderland|2010|\n+-------------------+----+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:20:53 PM",
+      "dateStarted": "Sep 18, 2016 6:21:18 PM",
+      "dateFinished": "Sep 18, 2016 6:21:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import csc.implicits._\r\n\r\nval rdd \u003d sc.parallelize(Array( (\"Alice in Wonderland\", 2010) ))\r\n\r\nval df  \u003d rdd.toDF(\"title\", \"year\")\r\ndf.show",
+      "dateUpdated": "Sep 18, 2016 6:28:28 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222877895_-248972832",
+      "id": "20160918-182117_105057270",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import csc.implicits._\nrdd: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[2] at parallelize at \u003cconsole\u003e:38\ndf: org.apache.spark.sql.DataFrame \u003d [title: string, year: int]\n+-------------------+----+\n|              title|year|\n+-------------------+----+\n|Alice in Wonderland|2010|\n+-------------------+----+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:21:17 PM",
+      "dateStarted": "Sep 18, 2016 6:28:28 PM",
+      "dateFinished": "Sep 18, 2016 6:28:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.sql.Row\r\nimport org.apache.spark.sql.types._\r\n\r\nval rdd \u003d sc.parallelize(Array( (\"Alice in Wonderland\", 2010) ))\r\n            .map{case(t,y) \u003d\u003e Row(t,y)}\r\n\r\nval schema \u003d StructType( List (\r\n                 StructField(\"title\", StringType,  false),\r\n                 StructField(\"year\",  IntegerType, false) ) )\r\n                 // true \u003d nullable, false \u003d not nullable\r\n\r\nval df \u003d csc.createDataFrame(rdd, schema)\r\ndf.show",
+      "dateUpdated": "Sep 18, 2016 6:29:29 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474222951305_-308533935",
+      "id": "20160918-182231_767227004",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.sql.Row\nimport org.apache.spark.sql.types._\nrdd: org.apache.spark.rdd.RDD[org.apache.spark.sql.Row] \u003d MapPartitionsRDD[8] at map at \u003cconsole\u003e:47\nschema: org.apache.spark.sql.types.StructType \u003d StructType(StructField(title,StringType,false), StructField(year,IntegerType,false))\ndf: org.apache.spark.sql.DataFrame \u003d [title: string, year: int]\n+-------------------+----+\n|              title|year|\n+-------------------+----+\n|Alice in Wonderland|2010|\n+-------------------+----+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:22:31 PM",
+      "dateStarted": "Sep 18, 2016 6:29:29 PM",
+      "dateFinished": "Sep 18, 2016 6:29:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.sql(\"SELECT * FROM killr_video.movies_by_actor\")\ndf.show",
+      "dateUpdated": "Sep 18, 2016 6:33:26 PM",
+      "config": {
+        "colWidth": 11.0,
+        "graph": {
+          "mode": "table",
+          "height": 381.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474223355517_-2136676819",
+      "id": "20160918-182915_346551858",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n+-----------+------------+--------------------+--------------------+------+--------------------+\n|      actor|release_year|            movie_id|              genres|rating|               title|\n+-----------+------------+--------------------+--------------------+------+--------------------+\n|Johnny Depp|        2017|4c760c80-735e-419...|[Action, Adventur...|  null|Pirates of the Ca...|\n|Johnny Depp|        2016|87a7b583-b817-49f...|[Adventure, Famil...|  null|Alice Through the...|\n|Johnny Depp|        2015|7d3bd9fb-d4c6-424...|[Comedy, Horror, ...|  null|         Yoga Hosers|\n|Johnny Depp|        2015|b363a377-1116-48c...|[Action, Comedy, ...|   5.5|           Mortdecai|\n|Johnny Depp|        2015|b8c3f19a-051e-481...|[Action, Crime, D...|  null|          Black Mass|\n|Johnny Depp|        2014|34074a6f-b015-491...|[Comedy, Drama, H...|   5.4|                Tusk|\n|Johnny Depp|        2014|740ba4e5-6787-400...|[Drama, Mystery, ...|   6.3|       Transcendence|\n|Johnny Depp|        2014|f1ebd8a2-54d3-4e3...| [Adventure, Sci-Fi]|   6.0|      Into the Woods|\n|Johnny Depp|        2013|254f8e05-7bd8-453...|[Action, Adventur...|   6.5|     The Lone Ranger|\n|Johnny Depp|        2013|eab3445e-e820-449...|             [Drama]|   6.0|          Lucky Them|\n|Johnny Depp|        2012|0ef58cb4-1968-420...|    [Comedy, Horror]|   6.2|        Dark Shadows|\n|Johnny Depp|        2011|2bd106bd-f3a8-4b4...|     [Comedy, Drama]|   6.2|       The Rum Diary|\n|Johnny Depp|        2011|b541bfa1-463c-4ac...|[Adventure, Anima...|   7.3|               Rango|\n|Johnny Depp|        2011|e96327f9-730c-40f...|[Action, Adventur...|   6.7|Pirates of the Ca...|\n|Johnny Depp|        2010|2abfb669-eb3b-457...|[Action, Romance,...|   6.0|         The Tourist|\n|Johnny Depp|        2010|ec0ac04a-db2e-41f...|[Adventure, Famil...|   6.5| Alice in Wonderland|\n|Johnny Depp|        2009|2fb2f5c8-ec99-4f3...|[Adventure, Fanta...|   6.9|The Imaginarium o...|\n|Johnny Depp|        2009|9932e86e-276d-421...|[Biography, Crime...|   7.0|      Public Enemies|\n|Johnny Depp|        2007|065e455e-7162-487...|[Action, Adventur...|   7.1|Pirates of the Ca...|\n|Johnny Depp|        2007|301a6a34-6f57-4b6...|[Drama, Horror, M...|   7.5|Sweeney Todd: The...|\n+-----------+------------+--------------------+--------------------+------+--------------------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:29:15 PM",
+      "dateStarted": "Sep 18, 2016 6:33:26 PM",
+      "dateFinished": "Sep 18, 2016 6:33:51 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.printSchema()",
+      "dateUpdated": "Sep 18, 2016 7:26:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474223428249_-1499461476",
+      "id": "20160918-183028_453748864",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "root\n |-- actor: string (nullable \u003d true)\n |-- release_year: integer (nullable \u003d true)\n |-- movie_id: string (nullable \u003d true)\n |-- genres: array (nullable \u003d true)\n |    |-- element: string (containsNull \u003d true)\n |-- rating: float (nullable \u003d true)\n |-- title: string (nullable \u003d true)\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 6:30:28 PM",
+      "dateStarted": "Sep 18, 2016 7:26:04 PM",
+      "dateFinished": "Sep 18, 2016 7:26:06 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.dtypes",
+      "dateUpdated": "Sep 18, 2016 7:26:32 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474226764199_-1797656151",
+      "id": "20160918-192604_1523879610",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res6: Array[(String, String)] \u003d Array((actor,StringType), (release_year,IntegerType), (movie_id,StringType), (genres,ArrayType(StringType,true)), (rating,FloatType), (title,StringType))\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:26:04 PM",
+      "dateStarted": "Sep 18, 2016 7:26:32 PM",
+      "dateFinished": "Sep 18, 2016 7:26:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "df.schema",
+      "dateUpdated": "Sep 18, 2016 7:27:02 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474226792125_-276297703",
+      "id": "20160918-192632_971513878",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res8: org.apache.spark.sql.types.StructType \u003d StructType(StructField(actor,StringType,true), StructField(release_year,IntegerType,true), StructField(movie_id,StringType,true), StructField(genres,ArrayType(StringType,true),true), StructField(rating,FloatType,true), StructField(title,StringType,true))\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:26:32 PM",
+      "dateStarted": "Sep 18, 2016 7:27:02 PM",
+      "dateFinished": "Sep 18, 2016 7:27:04 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.sql(\" SELECT title, release_year \" +\r\n                 \" FROM killr_video.movies_by_actor \" +\r\n                 \" WHERE title \u003d \u0027Alice in Wonderland\u0027\")\r\n// df: org.apache.spark.sql.DataFrame \u003d [title: string, release_year: int]\r\n\r\nval row \u003d df.first\r\n// row: org.apache.spark.sql.Row \u003d [Alice in Wonderland,2010]\r\n\r\nprintln(row(0))          // Alice in Wonderland\r\n\r\nprintln(row.isNullAt(1)) // false\r\n\r\nprintln(row.getInt(1))   // 2010",
+      "dateUpdated": "Sep 18, 2016 7:29:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474226822159_411046078",
+      "id": "20160918-192702_1791538476",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [title: string, release_year: int]\nrow: org.apache.spark.sql.Row \u003d [Alice in Wonderland,2010]\nAlice in Wonderland\nfalse\n2010\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:27:02 PM",
+      "dateStarted": "Sep 18, 2016 7:29:34 PM",
+      "dateFinished": "Sep 18, 2016 7:29:39 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.sql(\" SELECT genres \" +\r\n                 \" FROM killr_video.movies_by_actor \" +\r\n                 \" WHERE title \u003d \u0027Alice in Wonderland\u0027\")\r\n// df: org.apache.spark.sql.DataFrame \u003d [genres: array\u003cstring\u003e]\r\n\r\nval row \u003d df.first\r\n// row: org.apache.spark.sql.Row \u003d [ArrayBuffer(Adventure, Family, Fantasy)]\r\n\r\nrow(0).asInstanceOf[Seq[String]].foreach(println)\r\n// Adventure\r\n// Family\r\n// Fantasy",
+      "dateUpdated": "Sep 18, 2016 7:31:25 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474226888071_6967788",
+      "id": "20160918-192808_1362263291",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [genres: array\u003cstring\u003e]\nrow: org.apache.spark.sql.Row \u003d [WrappedArray(Adventure, Family, Fantasy)]\nAdventure\nFamily\nFantasy\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:28:08 PM",
+      "dateStarted": "Sep 18, 2016 7:31:25 PM",
+      "dateFinished": "Sep 18, 2016 7:31:32 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.sql(\" SELECT title, release_year, rating \" +\r\n                 \" FROM killr_video.movies_by_actor \" +\r\n                 \" WHERE actor \u003d \u0027Johnny Depp\u0027\")\r\n            .coalesce(1).cache\r\nprintln(\"Total: \" + df.count)\r\ndf.show(4)",
+      "dateUpdated": "Sep 18, 2016 7:37:00 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474227085407_1785367505",
+      "id": "20160918-193125_352299597",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [title: string, release_year: int, rating: float]\nTotal: 54\n+--------------------+------------+------+\n|               title|release_year|rating|\n+--------------------+------------+------+\n|Pirates of the Ca...|        2017|  null|\n|Alice Through the...|        2016|  null|\n|         Yoga Hosers|        2015|  null|\n|           Mortdecai|        2015|   5.5|\n+--------------------+------------+------+\nonly showing top 4 rows\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:31:25 PM",
+      "dateStarted": "Sep 18, 2016 7:37:00 PM",
+      "dateFinished": "Sep 18, 2016 7:37:12 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.read\r\n            .format(\"org.apache.spark.sql.cassandra\")\r\n            .options(Map( \"keyspace\" -\u003e \"killr_video\",\r\n                          \"table\" -\u003e \"movies_by_actor\" ))\r\n            .load",
+      "dateUpdated": "Sep 18, 2016 7:54:45 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474227420277_1115010683",
+      "id": "20160918-193700_493487153",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:37:00 PM",
+      "dateStarted": "Sep 18, 2016 7:54:45 PM",
+      "dateFinished": "Sep 18, 2016 7:54:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.sql.functions._\r\n\r\ndf.filter(\"actor \u003d \u0027Johnny Depp\u0027\")\r\n  .groupBy(\"release_year\")\r\n  .agg(Map(\"*\" -\u003e \"count\", \"rating\" -\u003e \"avg\"))\r\n  .withColumnRenamed(\"count(1)\", \"total_movies\")\r\n  .withColumnRenamed(\"avg(rating)\", \"average_rating\")\r\n  .select(\"release_year\", \"total_movies\", \"average_rating\")\r\n  .orderBy(desc(\"total_movies\"), desc(\"average_rating\"))\r\n  .limit(3)\r\n  .show",
+      "dateUpdated": "Sep 18, 2016 7:56:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474228485154_-1161049963",
+      "id": "20160918-195445_352205677",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.sql.functions._\n+------------+------------+-----------------+\n|release_year|total_movies|   average_rating|\n+------------+------------+-----------------+\n|        2004|           4|6.850000023841858|\n|        2000|           3|6.933333396911621|\n|        2011|           3|6.733333269755046|\n+------------+------------+-----------------+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:54:45 PM",
+      "dateStarted": "Sep 18, 2016 7:56:26 PM",
+      "dateFinished": "Sep 18, 2016 7:56:42 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// saving back to Cassandra",
+      "dateUpdated": "Sep 18, 2016 7:59:21 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474228754380_1923668028",
+      "id": "20160918-195914_1066322068",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 18, 2016 7:59:14 PM",
+      "dateStarted": "Sep 18, 2016 7:59:21 PM",
+      "dateFinished": "Sep 18, 2016 7:59:22 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movieDF \u003d csc.read\r\n                 .format(\"org.apache.spark.sql.cassandra\")\r\n                 .options(Map( \"keyspace\" -\u003e \"killr_video\",\r\n                               \"table\" -\u003e \"movies_by_actor\" ))\r\n                 .load",
+      "dateUpdated": "Sep 18, 2016 7:59:09 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474228566369_1036959207",
+      "id": "20160918-195606_2108257275",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movieDF: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:56:06 PM",
+      "dateStarted": "Sep 18, 2016 7:59:10 PM",
+      "dateFinished": "Sep 18, 2016 7:59:11 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "import org.apache.spark.sql.functions._\r\n\r\nval familyDF \u003d movieDF.filter(col(\"genres\").contains(\"Family\"))\r\n\r\nfamilyDF.show",
+      "dateUpdated": "Sep 18, 2016 8:07:28 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474228749883_220384647",
+      "id": "20160918-195909_1728305484",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.sql.functions._\norg.apache.spark.sql.AnalysisException: cannot resolve \u0027Contains(genres, Family)\u0027 due to data type mismatch: argument 1 requires string type, however, \u0027genres\u0027 is of array\u003cstring\u003e type.;\n\tat org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)\n\tat org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:65)\n\tat org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:57)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:335)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:335)\n\tat org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:69)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:334)\n\tat org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionUp$1(QueryPlan.scala:108)\n\tat org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$2(QueryPlan.scala:118)\n\tat org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$2.apply(QueryPlan.scala:127)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$class.foreach(Iterator.scala:727)\n\tat scala.collection.AbstractIterator.foreach(Iterator.scala:1157)\n\tat scala.collection.generic.Growable$class.$plus$plus$eq(Growable.scala:48)\n\tat scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:103)\n\tat scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:47)\n\tat scala.collection.TraversableOnce$class.to(TraversableOnce.scala:273)\n\tat scala.collection.AbstractIterator.to(Iterator.scala:1157)\n\tat scala.collection.TraversableOnce$class.toBuffer(TraversableOnce.scala:265)\n\tat scala.collection.AbstractIterator.toBuffer(Iterator.scala:1157)\n\tat scala.collection.TraversableOnce$class.toArray(TraversableOnce.scala:252)\n\tat scala.collection.AbstractIterator.toArray(Iterator.scala:1157)\n\tat org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:127)\n\tat org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:57)\n\tat org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:50)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:121)\n\tat org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:50)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:44)\n\tat org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:34)\n\tat org.apache.spark.sql.DataFrame.\u003cinit\u003e(DataFrame.scala:133)\n\tat org.apache.spark.sql.DataFrame.org$apache$spark$sql$DataFrame$$withPlan(DataFrame.scala:2126)\n\tat org.apache.spark.sql.DataFrame.filter(DataFrame.scala:755)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:52)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:59)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:61)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:63)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:65)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:67)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:69)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:71)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:73)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:75)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:77)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:79)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:81)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:83)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:85)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:87)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:89)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:91)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:93)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:95)\n\tat \u003cinit\u003e(\u003cconsole\u003e:97)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:101)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1065)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1346)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:840)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:871)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:819)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 7:59:09 PM",
+      "dateStarted": "Sep 18, 2016 8:06:47 PM",
+      "dateFinished": "Sep 18, 2016 8:06:50 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "familyDF.write\r\n        .format(\"org.apache.spark.sql.cassandra\")\r\n        .options(Map( \"keyspace\" -\u003e \"killr_video\",\r\n                      \"table\" -\u003e \"family_movies\" ))\r\n        .save",
+      "dateUpdated": "Sep 18, 2016 8:05:05 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474228779414_-1823386186",
+      "id": "20160918-195939_1883193780",
+      "dateCreated": "Sep 18, 2016 7:59:39 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "csc.setKeyspace(\"killr_video\")\r\n\r\nval maxDF \u003d csc.sql(\r\n    \" SELECT actor, MAX(rating) AS max_rating \" +\r\n    \" FROM movies_by_actor                    \" +\r\n    \" WHERE actor \u003d \u0027Johnny Depp\u0027             \" +\r\n    \" GROUP BY actor                          \" )\r\n\r\nmaxDF.show",
+      "dateUpdated": "Sep 18, 2016 8:58:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232322761_1501602068",
+      "id": "20160918-205842_787890388",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "maxDF: org.apache.spark.sql.DataFrame \u003d [actor: string, max_rating: float]\n+-----------+----------+\n|      actor|max_rating|\n+-----------+----------+\n|Johnny Depp|       8.6|\n+-----------+----------+\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 8:58:42 PM",
+      "dateStarted": "Sep 18, 2016 8:58:48 PM",
+      "dateFinished": "Sep 18, 2016 8:58:57 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "maxDF.registerTempTable(\"max_rating\")\r\n\r\nval movieDF \u003d csc.sql(\r\n    \" SELECT M.actor, title, release_year, rating    \" +\r\n    \" FROM max_rating AS R JOIN movies_by_actor AS M \" +\r\n    \" ON (R.actor \u003d M.actor)                         \" +\r\n    \" WHERE rating \u003e max_rating - 1                  \" +\r\n    \" ORDER BY release_year DESC, rating DESC        \" )\r\n\r\nmovieDF.show(2)",
+      "dateUpdated": "Sep 18, 2016 9:00:06 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232328041_-1574480713",
+      "id": "20160918-205848_1885689305",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movieDF: org.apache.spark.sql.DataFrame \u003d [actor: string, title: string, release_year: int, rating: float]\n+-----------+--------------------+------------+------+\n|      actor|               title|release_year|rating|\n+-----------+--------------------+------------+------+\n|Johnny Depp|   Finding Neverland|        2004|   7.8|\n|Johnny Depp|Pirates of the Ca...|        2003|   8.1|\n+-----------+--------------------+------------+------+\nonly showing top 2 rows\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 8:58:48 PM",
+      "dateStarted": "Sep 18, 2016 9:00:06 PM",
+      "dateFinished": "Sep 18, 2016 9:00:18 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "movieDF.explain",
+      "dateUpdated": "Sep 18, 2016 9:00:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232406372_-38239651",
+      "id": "20160918-210006_86536839",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "\u003d\u003d Physical Plan \u003d\u003d\nSort [release_year#103 DESC,rating#106 DESC], true, 0\n+- ConvertToUnsafe\n   +- Exchange rangepartitioning(release_year#103 DESC,rating#106 DESC,200), None\n      +- ConvertToSafe\n         +- Project [actor#102,title#107,release_year#103,rating#106]\n            +- Filter (rating#106 \u003e (max_rating#84 - 1.0))\n               +- BroadcastHashJoin [actor#85], [actor#102], BuildRight\n                  :- TungstenAggregate(key\u003d[actor#85], functions\u003d[(max(rating#89),mode\u003dFinal,isDistinct\u003dfalse)], output\u003d[actor#85,max_rating#84])\n                  :  +- TungstenExchange hashpartitioning(actor#85,200), None\n                  :     +- TungstenAggregate(key\u003d[actor#85], functions\u003d[(max(rating#89),mode\u003dPartial,isDistinct\u003dfalse)], output\u003d[actor#85,max#93])\n                  :        +- Scan org.apache.spark.sql.cassandra.CassandraSourceRelation@1c733873[actor#85,rating#89] PushedFilters: [EqualTo(actor,Johnny Depp)]\n                  +- ConvertToUnsafe\n                     +- Scan org.apache.spark.sql.cassandra.CassandraSourceRelation@1c733873[rating#106,title#107,actor#102,release_year#103]\n"
+      },
+      "dateCreated": "Sep 18, 2016 9:00:06 PM",
+      "dateStarted": "Sep 18, 2016 9:00:46 PM",
+      "dateFinished": "Sep 18, 2016 9:00:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "csc.sql(\" SELECT release_year, title \" +\r\n        \" FROM killr_video.movies_by_actor \" +\r\n        \" WHERE actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003c 2015\").show",
+      "dateUpdated": "Sep 18, 2016 9:05:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232446395_279239488",
+      "id": "20160918-210046_768653687",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------------+--------------------+\n|release_year|               title|\n+------------+--------------------+\n|        2014|                Tusk|\n|        2014|       Transcendence|\n|        2014|      Into the Woods|\n|        2013|     The Lone Ranger|\n|        2013|          Lucky Them|\n|        2012|        Dark Shadows|\n|        2011|       The Rum Diary|\n|        2011|               Rango|\n|        2011|Pirates of the Ca...|\n|        2010|         The Tourist|\n|        2010| Alice in Wonderland|\n|        2009|The Imaginarium o...|\n|        2009|      Public Enemies|\n|        2007|Pirates of the Ca...|\n|        2007|Sweeney Todd: The...|\n|        2006|Pirates of the Ca...|\n|        2005|Charlie and the C...|\n|        2004|       The Libertine|\n|        2004|       Secret Window|\n|        2004|   Finding Neverland|\n+------------+--------------------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 9:00:46 PM",
+      "dateStarted": "Sep 18, 2016 9:05:46 PM",
+      "dateFinished": "Sep 18, 2016 9:05:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val df \u003d csc.read.format(\"org.apache.spark.sql.cassandra\")\r\n            .options(Map( \"keyspace\" -\u003e \"killr_video\",\r\n                          \"table\" -\u003e \"movies_by_actor\" )).load\r\ndf.filter(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003c 2015\")\r\n  .select(\"release_year\", \"title\").show",
+      "dateUpdated": "Sep 18, 2016 9:05:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232746667_2113967430",
+      "id": "20160918-210546_537135019",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "df: org.apache.spark.sql.DataFrame \u003d [actor: string, release_year: int, movie_id: string, genres: array\u003cstring\u003e, rating: float, title: string]\n+------------+--------------------+\n|release_year|               title|\n+------------+--------------------+\n|        2014|                Tusk|\n|        2014|       Transcendence|\n|        2014|      Into the Woods|\n|        2013|     The Lone Ranger|\n|        2013|          Lucky Them|\n|        2012|        Dark Shadows|\n|        2011|       The Rum Diary|\n|        2011|               Rango|\n|        2011|Pirates of the Ca...|\n|        2010|         The Tourist|\n|        2010| Alice in Wonderland|\n|        2009|The Imaginarium o...|\n|        2009|      Public Enemies|\n|        2007|Pirates of the Ca...|\n|        2007|Sweeney Todd: The...|\n|        2006|Pirates of the Ca...|\n|        2005|Charlie and the C...|\n|        2004|       The Libertine|\n|        2004|       Secret Window|\n|        2004|   Finding Neverland|\n+------------+--------------------+\nonly showing top 20 rows\n\n"
+      },
+      "dateCreated": "Sep 18, 2016 9:05:46 PM",
+      "dateStarted": "Sep 18, 2016 9:05:58 PM",
+      "dateFinished": "Sep 18, 2016 9:06:00 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474232758141_-615441267",
+      "id": "20160918-210558_1424825236",
+      "dateCreated": "Sep 18, 2016 9:05:58 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "10-SparkSql",
+  "id": "2BVZDQS82",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

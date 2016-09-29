@@ -1,0 +1,590 @@
+{
+  "paragraphs": [
+    {
+      "text": "import com.datastax.spark.connector._",
+      "dateUpdated": "Sep 16, 2016 1:42:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033252881_2113265480",
+      "id": "20160916-134052_1910380838",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import com.datastax.spark.connector._\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:40:52 PM",
+      "dateStarted": "Sep 16, 2016 1:42:08 PM",
+      "dateFinished": "Sep 16, 2016 1:42:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003c 2015\")\r\n  .count",
+      "dateUpdated": "Sep 16, 2016 1:42:39 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033357611_1303105245",
+      "id": "20160916-134237_476880588",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res3: Long \u003d 49\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:42:37 PM",
+      "dateStarted": "Sep 16, 2016 1:42:40 PM",
+      "dateFinished": "Sep 16, 2016 1:42:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .where(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003c 2015\")\r\n  .cassandraCount",
+      "dateUpdated": "Sep 16, 2016 1:42:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033328170_1657276736",
+      "id": "20160916-134208_817419290",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res1: Long \u003d 49\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:42:08 PM",
+      "dateStarted": "Sep 16, 2016 1:42:12 PM",
+      "dateFinished": "Sep 16, 2016 1:42:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .filter(row \u003d\u003e row.getFloatOption(\"rating\").isDefined \u0026\u0026 row.getFloat(\"rating\") \u003e 6.0)\r\n  .count",
+      "dateUpdated": "Sep 16, 2016 1:49:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033328069_-1872055573",
+      "id": "20160916-134208_2097152809",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res15: Long \u003d 41\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:42:08 PM",
+      "dateStarted": "Sep 16, 2016 1:49:14 PM",
+      "dateFinished": "Sep 16, 2016 1:49:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .select(\"release_year\")\r\n               .where(\"actor \u003d \u0027Johnny Depp\u0027 AND release_year \u003c 2015\")\r\n               .cache\r\n\r\nprintln(movies.count)\r\nmovies.keyBy(row \u003d\u003e row.getInt(\"release_year\"))\r\n      .countByKey\r\n      .foreach(println)",
+      "dateUpdated": "Sep 16, 2016 1:50:43 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033463159_969882049",
+      "id": "20160916-134423_2076355597",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] \u003d CassandraTableScanRDD[27] at RDD at CassandraRDD.scala:15\n49\n(1995,2)\n(2014,3)\n(1999,3)\n(2010,2)\n(1985,2)\n(1992,1)\n(2007,2)\n(2011,3)\n(2000,3)\n(2006,1)\n(1984,1)\n(1991,1)\n(2001,2)\n(1997,2)\n(1993,2)\n(2005,1)\n(1990,2)\n(2012,1)\n(2013,2)\n(1998,1)\n(2004,4)\n(2009,2)\n(1994,2)\n(2003,2)\n(1986,2)\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:44:23 PM",
+      "dateStarted": "Sep 16, 2016 1:50:43 PM",
+      "dateFinished": "Sep 16, 2016 1:50:46 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// group by key",
+      "dateUpdated": "Sep 16, 2016 1:56:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033768570_1849450851",
+      "id": "20160916-134928_747725696",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 16, 2016 1:49:28 PM",
+      "dateStarted": "Sep 16, 2016 1:52:46 PM",
+      "dateFinished": "Sep 16, 2016 1:52:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .select(\"actor\",\"release_year\",\"title\")\r\n  .as((a:String, y:Int, t:String) \u003d\u003e ((a,y),t))\r\n  .groupByKey\r\n  .takeSample(false, 100)\r\n  .foreach(println)",
+      "dateUpdated": "Sep 16, 2016 1:56:27 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474033966731_-182348438",
+      "id": "20160916-135246_40840187",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "((Johnny Depp,1986),CompactBuffer(Platoon, Slow Burn))\n((Johnny Depp,1992),CompactBuffer(Arizona Dream))\n((Johnny Depp,1984),CompactBuffer(A Nightmare on Elm Street))\n((Johnny Depp,2005),CompactBuffer(Charlie and the Chocolate Factory))\n((Johnny Depp,2001),CompactBuffer(Blow, From Hell))\n((Johnny Depp,1985),CompactBuffer(Private Resort, Dummies))\n((Johnny Depp,2016),CompactBuffer(Alice Through the Looking Glass))\n((Johnny Depp,2006),CompactBuffer(Pirates of the Caribbean: Dead Man\u0027s Chest))\n((Johnny Depp,1991),CompactBuffer(Freddy\u0027s Dead: The Final Nightmare))\n((Johnny Depp,2014),CompactBuffer(Tusk, Transcendence, Into the Woods))\n((Johnny Depp,2011),CompactBuffer(The Rum Diary, Rango, Pirates of the Caribbean: On Stranger Tides))\n((Johnny Depp,2017),CompactBuffer(Pirates of the Caribbean: Dead Men Tell No Tales))\n((Johnny Depp,2015),CompactBuffer(Yoga Hosers, Mortdecai, Black Mass))\n((Johnny Depp,2000),CompactBuffer(Before Night Falls, Chocolat, The Man Who Cried))\n((Johnny Depp,1999),CompactBuffer(Sleepy Hollow, The Ninth Gate, The Astronaut\u0027s Wife))\n((Johnny Depp,2004),CompactBuffer(The Libertine, Secret Window, Finding Neverland, ...And They Lived Happily Ever After))\n((Johnny Depp,2010),CompactBuffer(The Tourist, Alice in Wonderland))\n((Johnny Depp,1994),CompactBuffer(Don Juan DeMarco, Ed Wood))\n((Johnny Depp,1995),CompactBuffer(Dead Man, Nick of Time))\n((Johnny Depp,2003),CompactBuffer(Pirates of the Caribbean: The Curse of the Black Pearl, Once Upon a Time in Mexico))\n((Johnny Depp,2012),CompactBuffer(Dark Shadows))\n((Johnny Depp,2013),CompactBuffer(The Lone Ranger, Lucky Them))\n((Johnny Depp,2009),CompactBuffer(The Imaginarium of Doctor Parnassus, Public Enemies))\n((Johnny Depp,1993),CompactBuffer(What\u0027s Eating Gilbert Grape, Benny \u0026 Joon))\n((Johnny Depp,2007),CompactBuffer(Pirates of the Caribbean: At World\u0027s End, Sweeney Todd: The Demon Barber of Fleet Street))\n((Johnny Depp,1997),CompactBuffer(The Brave, Donnie Brasco))\n((Johnny Depp,1998),CompactBuffer(Fear and Loathing in Las Vegas))\n((Johnny Depp,1990),CompactBuffer(Cry-Baby, Edward Scissorhands))\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:52:46 PM",
+      "dateStarted": "Sep 16, 2016 1:56:27 PM",
+      "dateFinished": "Sep 16, 2016 1:56:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n  .select(\"actor\",\"release_year\",\"title\")\r\n  .as((a:String, y:Int, t:String) \u003d\u003e ((a,y),t))\r\n  .spanByKey\r\n  .takeSample(false, 100)\r\n  .foreach(println)",
+      "dateUpdated": "Sep 16, 2016 1:56:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474034187086_2143949037",
+      "id": "20160916-135627_1617452650",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "((Johnny Depp,1993),ArrayBuffer(What\u0027s Eating Gilbert Grape, Benny \u0026 Joon))\n((Johnny Depp,2013),ArrayBuffer(The Lone Ranger, Lucky Them))\n((Johnny Depp,1991),ArrayBuffer(Freddy\u0027s Dead: The Final Nightmare))\n((Johnny Depp,1998),ArrayBuffer(Fear and Loathing in Las Vegas))\n((Johnny Depp,1994),ArrayBuffer(Don Juan DeMarco, Ed Wood))\n((Johnny Depp,2015),ArrayBuffer(Yoga Hosers, Mortdecai, Black Mass))\n((Johnny Depp,2005),ArrayBuffer(Charlie and the Chocolate Factory))\n((Johnny Depp,2000),ArrayBuffer(Before Night Falls, Chocolat, The Man Who Cried))\n((Johnny Depp,2012),ArrayBuffer(Dark Shadows))\n((Johnny Depp,1992),ArrayBuffer(Arizona Dream))\n((Johnny Depp,2007),ArrayBuffer(Pirates of the Caribbean: At World\u0027s End, Sweeney Todd: The Demon Barber of Fleet Street))\n((Johnny Depp,2010),ArrayBuffer(The Tourist, Alice in Wonderland))\n((Johnny Depp,1984),ArrayBuffer(A Nightmare on Elm Street))\n((Johnny Depp,2011),ArrayBuffer(The Rum Diary, Rango, Pirates of the Caribbean: On Stranger Tides))\n((Johnny Depp,2014),ArrayBuffer(Tusk, Transcendence, Into the Woods))\n((Johnny Depp,1999),ArrayBuffer(Sleepy Hollow, The Ninth Gate, The Astronaut\u0027s Wife))\n((Johnny Depp,2016),ArrayBuffer(Alice Through the Looking Glass))\n((Johnny Depp,1997),ArrayBuffer(The Brave, Donnie Brasco))\n((Johnny Depp,1985),ArrayBuffer(Private Resort, Dummies))\n((Johnny Depp,1990),ArrayBuffer(Cry-Baby, Edward Scissorhands))\n((Johnny Depp,2006),ArrayBuffer(Pirates of the Caribbean: Dead Man\u0027s Chest))\n((Johnny Depp,2004),ArrayBuffer(The Libertine, Secret Window, Finding Neverland, ...And They Lived Happily Ever After))\n((Johnny Depp,2009),ArrayBuffer(The Imaginarium of Doctor Parnassus, Public Enemies))\n((Johnny Depp,2001),ArrayBuffer(Blow, From Hell))\n((Johnny Depp,2003),ArrayBuffer(Pirates of the Caribbean: The Curse of the Black Pearl, Once Upon a Time in Mexico))\n((Johnny Depp,1995),ArrayBuffer(Dead Man, Nick of Time))\n((Johnny Depp,2017),ArrayBuffer(Pirates of the Caribbean: Dead Men Tell No Tales))\n((Johnny Depp,1986),ArrayBuffer(Platoon, Slow Burn))\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:56:27 PM",
+      "dateStarted": "Sep 16, 2016 1:56:40 PM",
+      "dateFinished": "Sep 16, 2016 1:56:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.cassandraTable[(String,Int,String)](\"killr_video\",\"movies_by_actor\")\r\n  .select(\"actor\",\"release_year\",\"title\")\r\n  .spanBy{case (a,y,t) \u003d\u003e (a,y)}\r\n  .takeSample(false, 100)\r\n  .foreach(println)",
+      "dateUpdated": "Sep 16, 2016 1:58:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474034200163_-1941299460",
+      "id": "20160916-135640_242581673",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "((Johnny Depp,1985),ArrayBuffer((Johnny Depp,1985,Private Resort), (Johnny Depp,1985,Dummies)))\n((Johnny Depp,1993),ArrayBuffer((Johnny Depp,1993,What\u0027s Eating Gilbert Grape), (Johnny Depp,1993,Benny \u0026 Joon)))\n((Johnny Depp,2014),ArrayBuffer((Johnny Depp,2014,Tusk), (Johnny Depp,2014,Transcendence), (Johnny Depp,2014,Into the Woods)))\n((Johnny Depp,2013),ArrayBuffer((Johnny Depp,2013,The Lone Ranger), (Johnny Depp,2013,Lucky Them)))\n((Johnny Depp,2011),ArrayBuffer((Johnny Depp,2011,The Rum Diary), (Johnny Depp,2011,Rango), (Johnny Depp,2011,Pirates of the Caribbean: On Stranger Tides)))\n((Johnny Depp,2010),ArrayBuffer((Johnny Depp,2010,The Tourist), (Johnny Depp,2010,Alice in Wonderland)))\n((Johnny Depp,2000),ArrayBuffer((Johnny Depp,2000,Before Night Falls), (Johnny Depp,2000,Chocolat), (Johnny Depp,2000,The Man Who Cried)))\n((Johnny Depp,2017),ArrayBuffer((Johnny Depp,2017,Pirates of the Caribbean: Dead Men Tell No Tales)))\n((Johnny Depp,2003),ArrayBuffer((Johnny Depp,2003,Pirates of the Caribbean: The Curse of the Black Pearl), (Johnny Depp,2003,Once Upon a Time in Mexico)))\n((Johnny Depp,1995),ArrayBuffer((Johnny Depp,1995,Dead Man), (Johnny Depp,1995,Nick of Time)))\n((Johnny Depp,2004),ArrayBuffer((Johnny Depp,2004,The Libertine), (Johnny Depp,2004,Secret Window), (Johnny Depp,2004,Finding Neverland), (Johnny Depp,2004,...And They Lived Happily Ever After)))\n((Johnny Depp,2012),ArrayBuffer((Johnny Depp,2012,Dark Shadows)))\n((Johnny Depp,2007),ArrayBuffer((Johnny Depp,2007,Pirates of the Caribbean: At World\u0027s End), (Johnny Depp,2007,Sweeney Todd: The Demon Barber of Fleet Street)))\n((Johnny Depp,1990),ArrayBuffer((Johnny Depp,1990,Cry-Baby), (Johnny Depp,1990,Edward Scissorhands)))\n((Johnny Depp,2005),ArrayBuffer((Johnny Depp,2005,Charlie and the Chocolate Factory)))\n((Johnny Depp,2001),ArrayBuffer((Johnny Depp,2001,Blow), (Johnny Depp,2001,From Hell)))\n((Johnny Depp,1998),ArrayBuffer((Johnny Depp,1998,Fear and Loathing in Las Vegas)))\n((Johnny Depp,2016),ArrayBuffer((Johnny Depp,2016,Alice Through the Looking Glass)))\n((Johnny Depp,1992),ArrayBuffer((Johnny Depp,1992,Arizona Dream)))\n((Johnny Depp,1986),ArrayBuffer((Johnny Depp,1986,Platoon), (Johnny Depp,1986,Slow Burn)))\n((Johnny Depp,1997),ArrayBuffer((Johnny Depp,1997,The Brave), (Johnny Depp,1997,Donnie Brasco)))\n((Johnny Depp,1984),ArrayBuffer((Johnny Depp,1984,A Nightmare on Elm Street)))\n((Johnny Depp,2015),ArrayBuffer((Johnny Depp,2015,Yoga Hosers), (Johnny Depp,2015,Mortdecai), (Johnny Depp,2015,Black Mass)))\n((Johnny Depp,1994),ArrayBuffer((Johnny Depp,1994,Don Juan DeMarco), (Johnny Depp,1994,Ed Wood)))\n((Johnny Depp,2006),ArrayBuffer((Johnny Depp,2006,Pirates of the Caribbean: Dead Man\u0027s Chest)))\n((Johnny Depp,1991),ArrayBuffer((Johnny Depp,1991,Freddy\u0027s Dead: The Final Nightmare)))\n((Johnny Depp,1999),ArrayBuffer((Johnny Depp,1999,Sleepy Hollow), (Johnny Depp,1999,The Ninth Gate), (Johnny Depp,1999,The Astronaut\u0027s Wife)))\n((Johnny Depp,2009),ArrayBuffer((Johnny Depp,2009,The Imaginarium of Doctor Parnassus), (Johnny Depp,2009,Public Enemies)))\n"
+      },
+      "dateCreated": "Sep 16, 2016 1:56:40 PM",
+      "dateStarted": "Sep 16, 2016 1:58:08 PM",
+      "dateFinished": "Sep 16, 2016 1:58:14 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "//joining tables",
+      "dateUpdated": "Sep 16, 2016 2:09:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474034288345_-900783548",
+      "id": "20160916-135808_1117917066",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 16, 2016 1:58:08 PM",
+      "dateStarted": "Sep 16, 2016 2:09:08 PM",
+      "dateFinished": "Sep 16, 2016 2:09:08 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val actors \u003d sc.cassandraTable(\"killr_video\",\"actors\")\r\n               .keyBy(row \u003d\u003e row.getString(\"actor\"))\r\nval movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .keyBy(row \u003d\u003e row.getString(\"actor\"))\r\nactors.join(movies).takeSample(false, 100).foreach(println)",
+      "dateUpdated": "Sep 16, 2016 2:11:23 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474034948324_639280932",
+      "id": "20160916-140908_1562683423",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "actors: org.apache.spark.rdd.RDD[(String, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[43] at keyBy at \u003cconsole\u003e:33\nmovies: org.apache.spark.rdd.RDD[(String, com.datastax.spark.connector.CassandraRow)] \u003d MapPartitionsRDD[45] at keyBy at \u003cconsole\u003e:33\njava.io.IOException: Couldn\u0027t find killr_video.actors or any similarly named keyspace and table pairs\n\tat com.datastax.spark.connector.rdd.CassandraTableRowReaderProvider$class.tableDef(CassandraTableRowReaderProvider.scala:57)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.tableDef$lzycompute(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.tableDef(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableRowReaderProvider$class.verify(CassandraTableRowReaderProvider.scala:146)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.verify(CassandraTableScanRDD.scala:61)\n\tat com.datastax.spark.connector.rdd.CassandraTableScanRDD.getPartitions(CassandraTableScanRDD.scala:231)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:239)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:237)\n\tat scala.Option.getOrElse(Option.scala:120)\n\tat org.apache.spark.rdd.RDD.partitions(RDD.scala:237)\n\tat org.apache.spark.rdd.MapPartitionsRDD.getPartitions(MapPartitionsRDD.scala:35)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:239)\n\tat org.apache.spark.rdd.RDD$$anonfun$partitions$2.apply(RDD.scala:237)\n\tat scala.Option.getOrElse(Option.scala:120)\n\tat org.apache.spark.rdd.RDD.partitions(RDD.scala:237)\n\tat org.apache.spark.Partitioner$$anonfun$2.apply(Partitioner.scala:58)\n\tat org.apache.spark.Partitioner$$anonfun$2.apply(Partitioner.scala:58)\n\tat scala.math.Ordering$$anon$5.compare(Ordering.scala:122)\n\tat java.util.TimSort.countRunAndMakeAscending(TimSort.java:355)\n\tat java.util.TimSort.sort(TimSort.java:220)\n\tat java.util.Arrays.sort(Arrays.java:1438)\n\tat scala.collection.SeqLike$class.sorted(SeqLike.scala:615)\n\tat scala.collection.AbstractSeq.sorted(Seq.scala:40)\n\tat scala.collection.SeqLike$class.sortBy(SeqLike.scala:594)\n\tat scala.collection.AbstractSeq.sortBy(Seq.scala:40)\n\tat org.apache.spark.Partitioner$.defaultPartitioner(Partitioner.scala:58)\n\tat org.apache.spark.rdd.PairRDDFunctions$$anonfun$join$2.apply(PairRDDFunctions.scala:651)\n\tat org.apache.spark.rdd.PairRDDFunctions$$anonfun$join$2.apply(PairRDDFunctions.scala:651)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:150)\n\tat org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:111)\n\tat org.apache.spark.rdd.RDD.withScope(RDD.scala:316)\n\tat org.apache.spark.rdd.PairRDDFunctions.join(PairRDDFunctions.scala:650)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:37)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:42)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:44)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:46)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:48)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:50)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:52)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:54)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:56)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:58)\n\tat \u003cinit\u003e(\u003cconsole\u003e:60)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:64)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1065)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1346)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:840)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:871)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:819)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n\n"
+      },
+      "dateCreated": "Sep 16, 2016 2:09:08 PM",
+      "dateStarted": "Sep 16, 2016 2:11:23 PM",
+      "dateFinished": "Sep 16, 2016 2:11:25 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class ActorYear(actor: String, release_year: Int)\r\nval actors2014 \u003d sc.parallelize(List(ActorYear(\"Johnny Depp\",2014),\r\n                                     ActorYear(\"Bruce Willis\",2014)))\r\n\r\nactors2014.joinWithCassandraTable(\"killr_video\",\"movies_by_actor\")\r\n          .takeSample(false, 100).foreach(println)\r\n// Sample output:\r\n// (ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2010, ...})",
+      "dateUpdated": "Sep 16, 2016 2:15:56 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035083553_-828319939",
+      "id": "20160916-141123_251745878",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class ActorYear\nactors2014: org.apache.spark.rdd.RDD[ActorYear] \u003d ParallelCollectionRDD[50] at parallelize at \u003cconsole\u003e:34\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: 254f8e05-7bd8-4530-a85c-b9d6a3bee47b, genres: {Action,Adventure,Western}, rating: 6.5, title: The Lone Ranger})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: f1ebd8a2-54d3-4e31-a450-57e06d269972, genres: {Adventure,Sci-Fi}, rating: 6.0, title: Into the Woods})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4b1b5484-d30b-47d4-bbd2-9d9c71b666f8, genres: {Drama,War}, rating: 8.1, title: Platoon})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: d90fb3c1-4dfe-4b5c-a7cd-c555f720b5d9, genres: {Comedy,Drama,Music}, rating: 6.6, title: ...And They Lived Happily Ever After})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 34074a6f-b015-491c-9895-84ec4b942610, genres: {Comedy,Drama,Horror}, rating: 5.4, title: Tusk})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b363a377-1116-48c6-8419-742a1d99b44c, genres: {Action,Comedy,Mystery}, rating: 5.5, title: Mortdecai})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 16dcb95e-ebf7-497d-9f83-5a641ef0654c, genres: {Action,Adventure,Fantasy}, rating: 8.1, title: Pirates of the Caribbean: The Curse of the Black Pearl})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: fc4b874e-dba4-424a-af2b-0f77f605f262, genres: {Biography,Crime,Drama}, rating: 7.8, title: Donnie Brasco})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: c12fecdb-f829-4841-8b8e-66d4ae42a2dd, genres: {Biography,Drama,Family}, rating: 7.8, title: Finding Neverland})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5022e18b-3b9d-437d-a87c-f68b05bc1830, genres: {Drama,Horror,Mystery}, rating: 7.4, title: Sleepy Hollow})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2017, movie_id: 4c760c80-735e-4191-b909-e6d124341a03, genres: {Action,Adventure,Comedy}, rating: null, title: Pirates of the Caribbean: Dead Men Tell No Tales})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: eab3445e-e820-4492-b0cb-e25d36419605, genres: {Drama}, rating: 6.0, title: Lucky Them})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2f9fc124-b3d3-4792-99ee-cb158ab1c6f7, genres: {Drama,Romance}, rating: 7.3, title: Chocolat})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 301a6a34-6f57-4b62-a9c9-830a2e052bdc, genres: {Drama,Horror,Musical}, rating: 7.5, title: Sweeney Todd: The Demon Barber of Fleet Street})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: ec0ac04a-db2e-41fa-a2da-b9e6fd7aecb4, genres: {Adventure,Family,Fantasy}, rating: 6.5, title: Alice in Wonderland})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: efde567a-d05a-4409-b9a3-6effc07d0941, genres: {Biography,Comedy,Drama}, rating: 7.9, title: Ed Wood})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: b0776872-3a64-454a-8de5-36b674a94928, genres: {Drama,Fantasy,Romance}, rating: 8.0, title: Edward Scissorhands})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: b541bfa1-463c-4ac1-b419-919ba3c6483c, genres: {Adventure,Animation,Comedy}, rating: 7.3, title: Rango})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 740ba4e5-6787-400e-bc92-55d6b1747ffb, genres: {Drama,Mystery,Romance}, rating: 6.3, title: Transcendence})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 21c95e73-0e40-4d87-ab34-9da6089ff2a9, genres: {Action,Thriller}, rating: 6.4, title: Once Upon a Time in Mexico})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4d2a3ad5-8a37-411b-8330-5ec1bada9940, genres: {Drama,Thriller}, rating: 5.4, title: Slow Burn})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2006, movie_id: ad8c414a-6ae7-4336-bac9-74f5bd4f3c7c, genres: {Action,Adventure,Fantasy}, rating: 7.3, title: Pirates of the Caribbean: Dead Man\u0027s Chest})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: 2abfb669-eb3b-4579-b4e5-7d400cd4bfe0, genres: {Action,Romance,Thriller}, rating: 6.0, title: The Tourist})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: ef990d55-e86f-423d-9dd1-bd8468516fb0, genres: {Horror,Mystery,Thriller}, rating: 6.8, title: From Hell})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: 7d3bd9fb-d4c6-4240-aec4-f235ea6e307c, genres: {Comedy,Horror,Thriller}, rating: null, title: Yoga Hosers})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: 081cfd7c-16e1-4c12-910f-1b7c7f012e6a, genres: {Comedy}, rating: 5.2, title: Private Resort})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 2daf1017-d76c-4410-b03a-14faee525416, genres: {Action,Crime,Drama}, rating: 6.3, title: Nick of Time})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: 2bd106bd-f3a8-4b48-8952-17a4feec690d, genres: {Comedy,Drama}, rating: 6.2, title: The Rum Diary})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: e83b9aea-47c0-41ba-ae83-ae3ffde1deaf, genres: {Drama}, rating: 8.6, title: Dummies})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 2fb2f5c8-ec99-4f39-b98c-ffc498ff9475, genres: {Adventure,Fantasy,Mystery}, rating: 6.9, title: The Imaginarium of Doctor Parnassus})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: 87945d02-36b0-42e8-a44b-a5d7f6a7e46a, genres: {Comedy,Drama,Romance}, rating: 6.8, title: Don Juan DeMarco})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 16d59ffc-a669-4f97-bf8e-ed5538eda02c, genres: {Drama,Fantasy,Western}, rating: 7.7, title: Dead Man})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: bd2fbcbf-eaa0-419d-ab1b-ee9f213cefb2, genres: {Comedy,Drama,Romance}, rating: 7.2, title: Benny \u0026 Joon})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1991, movie_id: 4df7a947-dbbc-4c86-84e8-c2678285e7e5, genres: {Comedy,Horror,Thriller}, rating: 4.9, title: Freddy\u0027s Dead: The Final Nightmare})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1992, movie_id: e8394181-eb3f-446e-8689-3a635c65cbc8, genres: {Comedy,Drama,Fantasy}, rating: 7.4, title: Arizona Dream})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 065e455e-7162-487e-bee4-9786a4b830f5, genres: {Action,Adventure,Fantasy}, rating: 7.1, title: Pirates of the Caribbean: At World\u0027s End})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 8b93eb2b-6286-4601-adff-467f88023d5d, genres: {Drama,Sci-Fi,Thriller}, rating: 5.3, title: The Astronaut\u0027s Wife})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2016, movie_id: 87a7b583-b817-49f7-9a45-7129ea6910e3, genres: {Adventure,Family,Fantasy}, rating: null, title: Alice Through the Looking Glass})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2c37bb1d-7017-4dbb-9ca1-e2b2cbe1fb35, genres: {Biography,Drama}, rating: 7.3, title: Before Night Falls})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: f5e99d71-a8bf-4faa-8c99-5c0664689c7c, genres: {Drama,Music,Romance}, rating: 6.2, title: The Man Who Cried})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1984, movie_id: 54061523-9c86-4f56-a258-a7ce28f649eb, genres: {Horror}, rating: 7.5, title: A Nightmare on Elm Street})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: 745a3d97-6273-482a-ad24-94ca2a71eaaf, genres: {Drama}, rating: 6.4, title: The Libertine})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: bfe6aaaf-4d1d-41db-ac97-2588430469d0, genres: {Mystery,Thriller}, rating: 6.6, title: Secret Window})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2005, movie_id: b50e347b-0a8a-4e47-99b0-fcfb3a8ac552, genres: {Adventure,Comedy,Family}, rating: 6.7, title: Charlie and the Chocolate Factory})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5864940a-3a80-4f87-8138-c39db7b3b383, genres: {Mystery,Thriller}, rating: 6.7, title: The Ninth Gate})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1998, movie_id: 1a1e23a8-9e39-45d2-b6d6-156b0f27affd, genres: {Comedy}, rating: 7.7, title: Fear and Loathing in Las Vegas})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b8c3f19a-051e-4811-a6f4-204ad79dbf6b, genres: {Action,Crime,Drama}, rating: null, title: Black Mass})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: 579491ce-d4c5-49c4-a0ea-2e31444a32ed, genres: {Drama}, rating: 7.8, title: What\u0027s Eating Gilbert Grape})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: d08ba9de-996e-4bf3-9eed-698da31c1636, genres: {Biography,Crime,Drama}, rating: 7.6, title: Blow})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 9932e86e-276d-421d-abfc-6b5d00db62da, genres: {Biography,Crime,Drama}, rating: 7.0, title: Public Enemies})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2012, movie_id: 0ef58cb4-1968-4207-820f-65d90825cf1e, genres: {Comedy,Horror}, rating: 6.2, title: Dark Shadows})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: 5cced2e1-0454-4f77-9c2a-368fb6adce2a, genres: {Comedy,Musical}, rating: 6.5, title: Cry-Baby})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: e96327f9-730c-40ff-93b7-c4a70aa42f7b, genres: {Action,Adventure,Fantasy}, rating: 6.7, title: Pirates of the Caribbean: On Stranger Tides})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: 48adcc21-8bae-42aa-b68f-f6adc4bc001e, genres: {Drama}, rating: 6.5, title: The Brave})\n"
+      },
+      "dateCreated": "Sep 16, 2016 2:11:23 PM",
+      "dateStarted": "Sep 16, 2016 2:15:56 PM",
+      "dateFinished": "Sep 16, 2016 2:15:59 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "actors2014.joinWithCassandraTable(\"killr_video\",\"movies_by_actor\")\r\n          .on(SomeColumns(\"actor\", \"release_year\"))\r\n          .takeSample(false, 100).foreach(println)\r\n// Sample output:\r\n// (ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp,release_year: 2014, ...})",
+      "dateUpdated": "Sep 16, 2016 2:16:09 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035274654_1458302426",
+      "id": "20160916-141434_1015537110",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 740ba4e5-6787-400e-bc92-55d6b1747ffb, genres: {Drama,Mystery,Romance}, rating: 6.3, title: Transcendence})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: f1ebd8a2-54d3-4e31-a450-57e06d269972, genres: {Adventure,Sci-Fi}, rating: 6.0, title: Into the Woods})\n(ActorYear(Johnny Depp,2014),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 34074a6f-b015-491c-9895-84ec4b942610, genres: {Comedy,Drama,Horror}, rating: 5.4, title: Tusk})\n"
+      },
+      "dateCreated": "Sep 16, 2016 2:14:34 PM",
+      "dateStarted": "Sep 16, 2016 2:16:09 PM",
+      "dateFinished": "Sep 16, 2016 2:16:10 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// joining two tables \u003d\u003d\u003e use smaller table first!",
+      "dateUpdated": "Sep 16, 2016 2:19:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035369187_-729425792",
+      "id": "20160916-141609_1445386283",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 16, 2016 2:16:09 PM",
+      "dateStarted": "Sep 16, 2016 2:19:34 PM",
+      "dateFinished": "Sep 16, 2016 2:19:34 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// Cassandra aware partitioning",
+      "dateUpdated": "Sep 16, 2016 2:21:45 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035574522_-1300318184",
+      "id": "20160916-141934_1057946778",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 16, 2016 2:19:34 PM",
+      "dateStarted": "Sep 16, 2016 2:21:45 PM",
+      "dateFinished": "Sep 16, 2016 2:21:46 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class Actor(actor: String)\r\nval actors \u003d sc.parallelize(List(Actor(\"Johnny Depp\"),Actor(\"Bruce Willis\")))\r\n\r\nactors.joinWithCassandraTable(\"killr_video\",\"movies_by_actor\")\r\n      .takeSample(false, 100).foreach(println)",
+      "dateUpdated": "Sep 16, 2016 2:21:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035705842_1986423104",
+      "id": "20160916-142145_288203335",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class Actor\nactors: org.apache.spark.rdd.RDD[Actor] \u003d ParallelCollectionRDD[54] at parallelize at \u003cconsole\u003e:34\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: 254f8e05-7bd8-4530-a85c-b9d6a3bee47b, genres: {Action,Adventure,Western}, rating: 6.5, title: The Lone Ranger})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: bd2fbcbf-eaa0-419d-ab1b-ee9f213cefb2, genres: {Comedy,Drama,Romance}, rating: 7.2, title: Benny \u0026 Joon})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: efde567a-d05a-4409-b9a3-6effc07d0941, genres: {Biography,Comedy,Drama}, rating: 7.9, title: Ed Wood})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5022e18b-3b9d-437d-a87c-f68b05bc1830, genres: {Drama,Horror,Mystery}, rating: 7.4, title: Sleepy Hollow})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: fc4b874e-dba4-424a-af2b-0f77f605f262, genres: {Biography,Crime,Drama}, rating: 7.8, title: Donnie Brasco})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: 745a3d97-6273-482a-ad24-94ca2a71eaaf, genres: {Drama}, rating: 6.4, title: The Libertine})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 301a6a34-6f57-4b62-a9c9-830a2e052bdc, genres: {Drama,Horror,Musical}, rating: 7.5, title: Sweeney Todd: The Demon Barber of Fleet Street})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b8c3f19a-051e-4811-a6f4-204ad79dbf6b, genres: {Action,Crime,Drama}, rating: null, title: Black Mass})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: ef990d55-e86f-423d-9dd1-bd8468516fb0, genres: {Horror,Mystery,Thriller}, rating: 6.8, title: From Hell})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 16d59ffc-a669-4f97-bf8e-ed5538eda02c, genres: {Drama,Fantasy,Western}, rating: 7.7, title: Dead Man})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: 081cfd7c-16e1-4c12-910f-1b7c7f012e6a, genres: {Comedy}, rating: 5.2, title: Private Resort})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: b0776872-3a64-454a-8de5-36b674a94928, genres: {Drama,Fantasy,Romance}, rating: 8.0, title: Edward Scissorhands})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 9932e86e-276d-421d-abfc-6b5d00db62da, genres: {Biography,Crime,Drama}, rating: 7.0, title: Public Enemies})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4d2a3ad5-8a37-411b-8330-5ec1bada9940, genres: {Drama,Thriller}, rating: 5.4, title: Slow Burn})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1992, movie_id: e8394181-eb3f-446e-8689-3a635c65cbc8, genres: {Comedy,Drama,Fantasy}, rating: 7.4, title: Arizona Dream})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: bfe6aaaf-4d1d-41db-ac97-2588430469d0, genres: {Mystery,Thriller}, rating: 6.6, title: Secret Window})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: 48adcc21-8bae-42aa-b68f-f6adc4bc001e, genres: {Drama}, rating: 6.5, title: The Brave})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2c37bb1d-7017-4dbb-9ca1-e2b2cbe1fb35, genres: {Biography,Drama}, rating: 7.3, title: Before Night Falls})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 2daf1017-d76c-4410-b03a-14faee525416, genres: {Action,Crime,Drama}, rating: 6.3, title: Nick of Time})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: 2abfb669-eb3b-4579-b4e5-7d400cd4bfe0, genres: {Action,Romance,Thriller}, rating: 6.0, title: The Tourist})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: e83b9aea-47c0-41ba-ae83-ae3ffde1deaf, genres: {Drama}, rating: 8.6, title: Dummies})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 740ba4e5-6787-400e-bc92-55d6b1747ffb, genres: {Drama,Mystery,Romance}, rating: 6.3, title: Transcendence})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: f5e99d71-a8bf-4faa-8c99-5c0664689c7c, genres: {Drama,Music,Romance}, rating: 6.2, title: The Man Who Cried})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2017, movie_id: 4c760c80-735e-4191-b909-e6d124341a03, genres: {Action,Adventure,Comedy}, rating: null, title: Pirates of the Caribbean: Dead Men Tell No Tales})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2006, movie_id: ad8c414a-6ae7-4336-bac9-74f5bd4f3c7c, genres: {Action,Adventure,Fantasy}, rating: 7.3, title: Pirates of the Caribbean: Dead Man\u0027s Chest})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 21c95e73-0e40-4d87-ab34-9da6089ff2a9, genres: {Action,Thriller}, rating: 6.4, title: Once Upon a Time in Mexico})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: ec0ac04a-db2e-41fa-a2da-b9e6fd7aecb4, genres: {Adventure,Family,Fantasy}, rating: 6.5, title: Alice in Wonderland})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: eab3445e-e820-4492-b0cb-e25d36419605, genres: {Drama}, rating: 6.0, title: Lucky Them})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4b1b5484-d30b-47d4-bbd2-9d9c71b666f8, genres: {Drama,War}, rating: 8.1, title: Platoon})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: e96327f9-730c-40ff-93b7-c4a70aa42f7b, genres: {Action,Adventure,Fantasy}, rating: 6.7, title: Pirates of the Caribbean: On Stranger Tides})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1991, movie_id: 4df7a947-dbbc-4c86-84e8-c2678285e7e5, genres: {Comedy,Horror,Thriller}, rating: 4.9, title: Freddy\u0027s Dead: The Final Nightmare})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2005, movie_id: b50e347b-0a8a-4e47-99b0-fcfb3a8ac552, genres: {Adventure,Comedy,Family}, rating: 6.7, title: Charlie and the Chocolate Factory})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2f9fc124-b3d3-4792-99ee-cb158ab1c6f7, genres: {Drama,Romance}, rating: 7.3, title: Chocolat})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2016, movie_id: 87a7b583-b817-49f7-9a45-7129ea6910e3, genres: {Adventure,Family,Fantasy}, rating: null, title: Alice Through the Looking Glass})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: 7d3bd9fb-d4c6-4240-aec4-f235ea6e307c, genres: {Comedy,Horror,Thriller}, rating: null, title: Yoga Hosers})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 16dcb95e-ebf7-497d-9f83-5a641ef0654c, genres: {Action,Adventure,Fantasy}, rating: 8.1, title: Pirates of the Caribbean: The Curse of the Black Pearl})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: d90fb3c1-4dfe-4b5c-a7cd-c555f720b5d9, genres: {Comedy,Drama,Music}, rating: 6.6, title: ...And They Lived Happily Ever After})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: 5cced2e1-0454-4f77-9c2a-368fb6adce2a, genres: {Comedy,Musical}, rating: 6.5, title: Cry-Baby})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1984, movie_id: 54061523-9c86-4f56-a258-a7ce28f649eb, genres: {Horror}, rating: 7.5, title: A Nightmare on Elm Street})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 2fb2f5c8-ec99-4f39-b98c-ffc498ff9475, genres: {Adventure,Fantasy,Mystery}, rating: 6.9, title: The Imaginarium of Doctor Parnassus})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2012, movie_id: 0ef58cb4-1968-4207-820f-65d90825cf1e, genres: {Comedy,Horror}, rating: 6.2, title: Dark Shadows})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: c12fecdb-f829-4841-8b8e-66d4ae42a2dd, genres: {Biography,Drama,Family}, rating: 7.8, title: Finding Neverland})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: f1ebd8a2-54d3-4e31-a450-57e06d269972, genres: {Adventure,Sci-Fi}, rating: 6.0, title: Into the Woods})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 065e455e-7162-487e-bee4-9786a4b830f5, genres: {Action,Adventure,Fantasy}, rating: 7.1, title: Pirates of the Caribbean: At World\u0027s End})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 34074a6f-b015-491c-9895-84ec4b942610, genres: {Comedy,Drama,Horror}, rating: 5.4, title: Tusk})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: 87945d02-36b0-42e8-a44b-a5d7f6a7e46a, genres: {Comedy,Drama,Romance}, rating: 6.8, title: Don Juan DeMarco})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b363a377-1116-48c6-8419-742a1d99b44c, genres: {Action,Comedy,Mystery}, rating: 5.5, title: Mortdecai})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 8b93eb2b-6286-4601-adff-467f88023d5d, genres: {Drama,Sci-Fi,Thriller}, rating: 5.3, title: The Astronaut\u0027s Wife})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1998, movie_id: 1a1e23a8-9e39-45d2-b6d6-156b0f27affd, genres: {Comedy}, rating: 7.7, title: Fear and Loathing in Las Vegas})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5864940a-3a80-4f87-8138-c39db7b3b383, genres: {Mystery,Thriller}, rating: 6.7, title: The Ninth Gate})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: d08ba9de-996e-4bf3-9eed-698da31c1636, genres: {Biography,Crime,Drama}, rating: 7.6, title: Blow})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: b541bfa1-463c-4ac1-b419-919ba3c6483c, genres: {Adventure,Animation,Comedy}, rating: 7.3, title: Rango})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: 2bd106bd-f3a8-4b48-8952-17a4feec690d, genres: {Comedy,Drama}, rating: 6.2, title: The Rum Diary})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: 579491ce-d4c5-49c4-a0ea-2e31444a32ed, genres: {Drama}, rating: 7.8, title: What\u0027s Eating Gilbert Grape})\n"
+      },
+      "dateCreated": "Sep 16, 2016 2:21:45 PM",
+      "dateStarted": "Sep 16, 2016 2:21:49 PM",
+      "dateFinished": "Sep 16, 2016 2:21:51 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class Actor(actor: String)\r\nval actors \u003d sc.parallelize(List(Actor(\"Johnny Depp\"),Actor(\"Bruce Willis\")))\r\n               .repartitionByCassandraReplica(\"killr_video\",\"movies_by_actor\")\r\n\r\nactors.joinWithCassandraTable(\"killr_video\",\"movies_by_actor\")\r\n      .takeSample(false, 100).foreach(println)",
+      "dateUpdated": "Sep 16, 2016 2:24:15 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035708944_-647198441",
+      "id": "20160916-142148_1011777653",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class Actor\nactors: com.datastax.spark.connector.rdd.partitioner.CassandraPartitionedRDD[Actor] \u003d CassandraPartitionedRDD[60] at RDD at CassandraPartitionedRDD.scala:12\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4d2a3ad5-8a37-411b-8330-5ec1bada9940, genres: {Drama,Thriller}, rating: 5.4, title: Slow Burn})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: 254f8e05-7bd8-4530-a85c-b9d6a3bee47b, genres: {Action,Adventure,Western}, rating: 6.5, title: The Lone Ranger})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: f5e99d71-a8bf-4faa-8c99-5c0664689c7c, genres: {Drama,Music,Romance}, rating: 6.2, title: The Man Who Cried})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: e83b9aea-47c0-41ba-ae83-ae3ffde1deaf, genres: {Drama}, rating: 8.6, title: Dummies})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 8b93eb2b-6286-4601-adff-467f88023d5d, genres: {Drama,Sci-Fi,Thriller}, rating: 5.3, title: The Astronaut\u0027s Wife})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: b541bfa1-463c-4ac1-b419-919ba3c6483c, genres: {Adventure,Animation,Comedy}, rating: 7.3, title: Rango})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: c12fecdb-f829-4841-8b8e-66d4ae42a2dd, genres: {Biography,Drama,Family}, rating: 7.8, title: Finding Neverland})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2017, movie_id: 4c760c80-735e-4191-b909-e6d124341a03, genres: {Action,Adventure,Comedy}, rating: null, title: Pirates of the Caribbean: Dead Men Tell No Tales})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 21c95e73-0e40-4d87-ab34-9da6089ff2a9, genres: {Action,Thriller}, rating: 6.4, title: Once Upon a Time in Mexico})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1985, movie_id: 081cfd7c-16e1-4c12-910f-1b7c7f012e6a, genres: {Comedy}, rating: 5.2, title: Private Resort})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: b0776872-3a64-454a-8de5-36b674a94928, genres: {Drama,Fantasy,Romance}, rating: 8.0, title: Edward Scissorhands})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 34074a6f-b015-491c-9895-84ec4b942610, genres: {Comedy,Drama,Horror}, rating: 5.4, title: Tusk})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: 740ba4e5-6787-400e-bc92-55d6b1747ffb, genres: {Drama,Mystery,Romance}, rating: 6.3, title: Transcendence})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2014, movie_id: f1ebd8a2-54d3-4e31-a450-57e06d269972, genres: {Adventure,Sci-Fi}, rating: 6.0, title: Into the Woods})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2f9fc124-b3d3-4792-99ee-cb158ab1c6f7, genres: {Drama,Romance}, rating: 7.3, title: Chocolat})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1986, movie_id: 4b1b5484-d30b-47d4-bbd2-9d9c71b666f8, genres: {Drama,War}, rating: 8.1, title: Platoon})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: bd2fbcbf-eaa0-419d-ab1b-ee9f213cefb2, genres: {Comedy,Drama,Romance}, rating: 7.2, title: Benny \u0026 Joon})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: 2abfb669-eb3b-4579-b4e5-7d400cd4bfe0, genres: {Action,Romance,Thriller}, rating: 6.0, title: The Tourist})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: efde567a-d05a-4409-b9a3-6effc07d0941, genres: {Biography,Comedy,Drama}, rating: 7.9, title: Ed Wood})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 2fb2f5c8-ec99-4f39-b98c-ffc498ff9475, genres: {Adventure,Fantasy,Mystery}, rating: 6.9, title: The Imaginarium of Doctor Parnassus})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2000, movie_id: 2c37bb1d-7017-4dbb-9ca1-e2b2cbe1fb35, genres: {Biography,Drama}, rating: 7.3, title: Before Night Falls})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b363a377-1116-48c6-8419-742a1d99b44c, genres: {Action,Comedy,Mystery}, rating: 5.5, title: Mortdecai})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1992, movie_id: e8394181-eb3f-446e-8689-3a635c65cbc8, genres: {Comedy,Drama,Fantasy}, rating: 7.4, title: Arizona Dream})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1994, movie_id: 87945d02-36b0-42e8-a44b-a5d7f6a7e46a, genres: {Comedy,Drama,Romance}, rating: 6.8, title: Don Juan DeMarco})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2006, movie_id: ad8c414a-6ae7-4336-bac9-74f5bd4f3c7c, genres: {Action,Adventure,Fantasy}, rating: 7.3, title: Pirates of the Caribbean: Dead Man\u0027s Chest})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: b8c3f19a-051e-4811-a6f4-204ad79dbf6b, genres: {Action,Crime,Drama}, rating: null, title: Black Mass})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 301a6a34-6f57-4b62-a9c9-830a2e052bdc, genres: {Drama,Horror,Musical}, rating: 7.5, title: Sweeney Todd: The Demon Barber of Fleet Street})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 2daf1017-d76c-4410-b03a-14faee525416, genres: {Action,Crime,Drama}, rating: 6.3, title: Nick of Time})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2003, movie_id: 16dcb95e-ebf7-497d-9f83-5a641ef0654c, genres: {Action,Adventure,Fantasy}, rating: 8.1, title: Pirates of the Caribbean: The Curse of the Black Pearl})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2009, movie_id: 9932e86e-276d-421d-abfc-6b5d00db62da, genres: {Biography,Crime,Drama}, rating: 7.0, title: Public Enemies})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2015, movie_id: 7d3bd9fb-d4c6-4240-aec4-f235ea6e307c, genres: {Comedy,Horror,Thriller}, rating: null, title: Yoga Hosers})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: e96327f9-730c-40ff-93b7-c4a70aa42f7b, genres: {Action,Adventure,Fantasy}, rating: 6.7, title: Pirates of the Caribbean: On Stranger Tides})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: bfe6aaaf-4d1d-41db-ac97-2588430469d0, genres: {Mystery,Thriller}, rating: 6.6, title: Secret Window})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: fc4b874e-dba4-424a-af2b-0f77f605f262, genres: {Biography,Crime,Drama}, rating: 7.8, title: Donnie Brasco})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1990, movie_id: 5cced2e1-0454-4f77-9c2a-368fb6adce2a, genres: {Comedy,Musical}, rating: 6.5, title: Cry-Baby})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2007, movie_id: 065e455e-7162-487e-bee4-9786a4b830f5, genres: {Action,Adventure,Fantasy}, rating: 7.1, title: Pirates of the Caribbean: At World\u0027s End})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: ef990d55-e86f-423d-9dd1-bd8468516fb0, genres: {Horror,Mystery,Thriller}, rating: 6.8, title: From Hell})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2005, movie_id: b50e347b-0a8a-4e47-99b0-fcfb3a8ac552, genres: {Adventure,Comedy,Family}, rating: 6.7, title: Charlie and the Chocolate Factory})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2001, movie_id: d08ba9de-996e-4bf3-9eed-698da31c1636, genres: {Biography,Crime,Drama}, rating: 7.6, title: Blow})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1991, movie_id: 4df7a947-dbbc-4c86-84e8-c2678285e7e5, genres: {Comedy,Horror,Thriller}, rating: 4.9, title: Freddy\u0027s Dead: The Final Nightmare})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2011, movie_id: 2bd106bd-f3a8-4b48-8952-17a4feec690d, genres: {Comedy,Drama}, rating: 6.2, title: The Rum Diary})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1995, movie_id: 16d59ffc-a669-4f97-bf8e-ed5538eda02c, genres: {Drama,Fantasy,Western}, rating: 7.7, title: Dead Man})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1993, movie_id: 579491ce-d4c5-49c4-a0ea-2e31444a32ed, genres: {Drama}, rating: 7.8, title: What\u0027s Eating Gilbert Grape})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5022e18b-3b9d-437d-a87c-f68b05bc1830, genres: {Drama,Horror,Mystery}, rating: 7.4, title: Sleepy Hollow})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2013, movie_id: eab3445e-e820-4492-b0cb-e25d36419605, genres: {Drama}, rating: 6.0, title: Lucky Them})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1997, movie_id: 48adcc21-8bae-42aa-b68f-f6adc4bc001e, genres: {Drama}, rating: 6.5, title: The Brave})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1998, movie_id: 1a1e23a8-9e39-45d2-b6d6-156b0f27affd, genres: {Comedy}, rating: 7.7, title: Fear and Loathing in Las Vegas})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2012, movie_id: 0ef58cb4-1968-4207-820f-65d90825cf1e, genres: {Comedy,Horror}, rating: 6.2, title: Dark Shadows})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: d90fb3c1-4dfe-4b5c-a7cd-c555f720b5d9, genres: {Comedy,Drama,Music}, rating: 6.6, title: ...And They Lived Happily Ever After})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2016, movie_id: 87a7b583-b817-49f7-9a45-7129ea6910e3, genres: {Adventure,Family,Fantasy}, rating: null, title: Alice Through the Looking Glass})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2004, movie_id: 745a3d97-6273-482a-ad24-94ca2a71eaaf, genres: {Drama}, rating: 6.4, title: The Libertine})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 2010, movie_id: ec0ac04a-db2e-41fa-a2da-b9e6fd7aecb4, genres: {Adventure,Family,Fantasy}, rating: 6.5, title: Alice in Wonderland})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1984, movie_id: 54061523-9c86-4f56-a258-a7ce28f649eb, genres: {Horror}, rating: 7.5, title: A Nightmare on Elm Street})\n(Actor(Johnny Depp),CassandraRow{actor: Johnny Depp, release_year: 1999, movie_id: 5864940a-3a80-4f87-8138-c39db7b3b383, genres: {Mystery,Thriller}, rating: 6.7, title: The Ninth Gate})\n"
+      },
+      "dateCreated": "Sep 16, 2016 2:21:48 PM",
+      "dateStarted": "Sep 16, 2016 2:24:15 PM",
+      "dateFinished": "Sep 16, 2016 2:24:18 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1474035855083_-840925829",
+      "id": "20160916-142415_1710545361",
+      "dateCreated": "Sep 16, 2016 2:24:15 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "8-Optimize_Cassandra",
+  "id": "2BV7ANN9C",
+  "angularObjects": {
+    "2BVBBXM7F:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

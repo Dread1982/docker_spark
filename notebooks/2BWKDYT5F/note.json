@@ -1,0 +1,156 @@
+{
+  "paragraphs": [
+    {
+      "text": "val popularTitles \u003d sc.broadcast(Set(\"Alice in Wonderland\",\r\n                                     \"Alice Through the Looking Glass\", \"...\"))\r\n\r\nval movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .select(\"title\",\"release_year\",\"rating\",\"genres\")\r\n               .cache\r\n\r\nmovies.filter(row \u003d\u003e popularTitles.value contains row.getString(\"title\"))\r\n      .saveToCassandra(\"killr_video\", \"favorite_movies\",\r\n                       SomeColumns(\"title\",\"release_year\",\"rating\",\"genres\"))\r\n\r\nmovies.filter(row \u003d\u003e !(popularTitles.value contains row.getString(\"title\")))\r\n      .saveToCassandra(\"killr_video\", \"other_movies\",\r\n                       SomeColumns(\"title\",\"release_year\",\"rating\",\"genres\"))",
+      "dateUpdated": "Sep 14, 2016 2:50:00 PM",
+      "config": {
+        "colWidth": 11.0,
+        "graph": {
+          "mode": "table",
+          "height": 421.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473863336424_251173247",
+      "id": "20160914-142856_362445528",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "popularTitles: org.apache.spark.broadcast.Broadcast[scala.collection.immutable.Set[String]] \u003d Broadcast(18)\nmovies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] \u003d CassandraTableScanRDD[64] at RDD at CassandraRDD.scala:15\njava.io.IOException: Table not found: killr_video.other_movies\n\tat com.datastax.spark.connector.writer.TableWriter$$anonfun$32.apply(TableWriter.scala:269)\n\tat com.datastax.spark.connector.writer.TableWriter$$anonfun$32.apply(TableWriter.scala:269)\n\tat scala.Option.getOrElse(Option.scala:120)\n\tat com.datastax.spark.connector.writer.TableWriter$.apply(TableWriter.scala:269)\n\tat com.datastax.spark.connector.RDDFunctions.saveToCassandra(RDDFunctions.scala:36)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:38)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:44)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:46)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:48)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:50)\n\tat $iwC$$iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:52)\n\tat $iwC$$iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:54)\n\tat $iwC$$iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:56)\n\tat $iwC$$iwC.\u003cinit\u003e(\u003cconsole\u003e:58)\n\tat $iwC.\u003cinit\u003e(\u003cconsole\u003e:60)\n\tat \u003cinit\u003e(\u003cconsole\u003e:62)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:66)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat .\u003cinit\u003e(\u003cconsole\u003e:7)\n\tat .\u003cclinit\u003e(\u003cconsole\u003e)\n\tat $print(\u003cconsole\u003e)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.spark.repl.SparkIMain$ReadEvalPrint.call(SparkIMain.scala:1065)\n\tat org.apache.spark.repl.SparkIMain$Request.loadAndRun(SparkIMain.scala:1346)\n\tat org.apache.spark.repl.SparkIMain.loadAndRunReq$1(SparkIMain.scala:840)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:871)\n\tat org.apache.spark.repl.SparkIMain.interpret(SparkIMain.scala:819)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpretInput(SparkInterpreter.java:810)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:753)\n\tat org.apache.zeppelin.spark.SparkInterpreter.interpret(SparkInterpreter.java:746)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:94)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:341)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:176)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler$1.run(FIFOScheduler.java:139)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)\n\tat java.lang.Thread.run(Thread.java:745)\n\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:28:56 PM",
+      "dateStarted": "Sep 14, 2016 2:50:00 PM",
+      "dateFinished": "Sep 14, 2016 2:50:06 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movieRatings \u003d sc.cassandraTable(\"killr_video\",\"favorite_movies\")\r\n                     .select(\"rating\")\r\n                     .filter(row \u003d\u003e row.getFloatOption(\"rating\").isDefined)\r\n                     .map(row \u003d\u003e row.getFloat(\"rating\"))\r\n                     .cache\r\n\r\nval numRatings   \u003d movieRatings.count\r\nval sumRatings   \u003d movieRatings.sum\r\nval avgRating    \u003d sumRatings / numRatings\r\n\r\nprintln(f\"$avgRating%1.1f\")",
+      "dateUpdated": "Sep 14, 2016 2:37:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473863410838_392299472",
+      "id": "20160914-143010_1582195686",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movieRatings: org.apache.spark.rdd.RDD[Float] \u003d MapPartitionsRDD[52] at map at \u003cconsole\u003e:35\nnumRatings: Long \u003d 1\nsumRatings: Double \u003d 6.5\navgRating: Double \u003d 6.5\n6.5\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:30:10 PM",
+      "dateStarted": "Sep 14, 2016 2:37:55 PM",
+      "dateFinished": "Sep 14, 2016 2:38:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val numRatings \u003d sc.accumulator(0)\r\nval sumRatings \u003d sc.accumulator(0.0)\r\n\r\nsc.cassandraTable(\"killr_video\",\"favorite_movies\")\r\n  .select(\"rating\")\r\n  .filter(row \u003d\u003e row.getFloatOption(\"rating\").isDefined)\r\n  .foreach{row \u003d\u003e numRatings +\u003d 1; sumRatings +\u003d row.getFloat(\"rating\")}\r\n\r\nval avgRating \u003d sumRatings.value / numRatings.value\r\n\r\nprintln(f\"$avgRating%1.1f\")",
+      "dateUpdated": "Sep 14, 2016 2:39:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473863875278_-99579309",
+      "id": "20160914-143755_2012571166",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "numRatings: org.apache.spark.Accumulator[Int] \u003d 0\nsumRatings: org.apache.spark.Accumulator[Double] \u003d 0.0\navgRating: Double \u003d 6.5\n6.5\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:37:55 PM",
+      "dateStarted": "Sep 14, 2016 2:39:26 PM",
+      "dateFinished": "Sep 14, 2016 2:39:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val movies \u003d sc.cassandraTable(\"killr_video\",\"movies_by_actor\")\r\n               .select(\"release_year\",\"genres\")\r\n               .cache\r\n\r\nval movies2014 \u003d movies.filter(row \u003d\u003e row.getInt(\"release_year\") \u003d\u003d 2014)\r\n                       .cache\r\nval total2014  \u003d movies2014.count\r\nval comedy2014 \u003d movies2014.filter(row \u003d\u003e row.getSet[String](\"genres\")\r\n                                          contains \"Comedy\").count\r\nval percentage2014 \u003d 100.0 * comedy2014 / total2014\r\n\r\nval movies2013 \u003d movies.filter(row \u003d\u003e row.getInt(\"release_year\") \u003d\u003d 2013)\r\n                       .cache\r\nval total2013  \u003d movies2013.count\r\nval comedy2013 \u003d movies2013.filter(row \u003d\u003e row.getSet[String](\"genres\")\r\n                                          contains \"Comedy\").count\r\nval percentage2013 \u003d 100.0 * comedy2013 / total2013",
+      "dateUpdated": "Sep 14, 2016 2:50:27 PM",
+      "config": {
+        "colWidth": 11.0,
+        "graph": {
+          "mode": "table",
+          "height": 286.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473863966944_632768058",
+      "id": "20160914-143926_1174797739",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "movies: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] \u003d CassandraTableScanRDD[58] at RDD at CassandraRDD.scala:15\nmovies2014: org.apache.spark.rdd.RDD[com.datastax.spark.connector.CassandraRow] \u003d MapPartitionsRDD[59] at filter at \u003cconsole\u003e:34\ntotal2014: Long \u003d 3\ncomedy2014: Long \u003d 1\npercentage2014: Double \u003d 33.333333333333336\nmovies2013: org.apache.spark.rdd.RDD[com.datastax.spark.connector.CassandraRow] \u003d MapPartitionsRDD[61] at filter at \u003cconsole\u003e:34\ntotal2013: Long \u003d 2\ncomedy2013: Long \u003d 0\npercentage2013: Double \u003d 0.0\n"
+      },
+      "dateCreated": "Sep 14, 2016 2:39:26 PM",
+      "dateStarted": "Sep 14, 2016 2:49:35 PM",
+      "dateFinished": "Sep 14, 2016 2:49:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1473864575823_-994125435",
+      "id": "20160914-144935_1438487775",
+      "dateCreated": "Sep 14, 2016 2:49:35 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "5-Optimizations",
+  "id": "2BWKDYT5F",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
